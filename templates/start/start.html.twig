@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <h1>Client</h1>
+        </div>
+        <div class="row">
+            <h2>
+                <ul>
+                    {% if user.client != null %}
+                        <li><a href="{{ path('beneficiary_service_list') }}">Cont beneficiar</a></li>
+                    {% endif %}
+                    {% if user.serviceProvider != null %}
+                        <li><a href="{{ path('provider_service_list') }}">Cont prestator de servicii</a></li>
+                    {% endif %}
+                 </ul>
+            </h2>
+        </div>
+    </div>
+{% endblock %}

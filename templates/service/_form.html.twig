@@ -1,0 +1,5 @@
+{{ form_start(registerForm) }}
+     {{ form_row(registerForm.name, {'label' : 'Denumire: '}) }}
+     {{ form_row(registerForm.description, {'label' : 'Descriere: '}) }}
+     <button type = "submit" class="btn btn-action" formnovalidate>{{ buttonText }}</button>
+{{ form_end(registerForm) }}

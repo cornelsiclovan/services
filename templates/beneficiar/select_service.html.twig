@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <h1>Alegeti un serviciu:</h1>
+
+                {{ include ('/beneficiar/list.html.twig') }}
+
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        jQuery(document).ready(function() {
+            $('.js-remove-property').on('click', function (e) {
+                e.preventDefault();
+
+                var $el = $(this).closest('tr');
+                $(this).find('.fa-trash')
+                    .removeClass('fa-trash')
+                    .addClass('fa-spinner')
+                    .addClass('fa-spin');
+
+                $.ajax({
+                    url: $(this).data('url'),
+                    method: 'DELETE'
+                }).done(function () {
+                    $el.fadeOut();
+                });
+            });
+        });
+    </script>
+{% endblock %}

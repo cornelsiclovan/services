@@ -19,9 +19,9 @@ class ServiceProviderRepository extends ServiceEntityRepository
         parent::__construct($registry, ServiceProvider::class);
     }
 
-//    /**
-//     * @return ServiceProvider[] Returns an array of ServiceProvider objects
-//     */
+    // /**
+    //  * @return ServiceProvider[] Returns an array of ServiceProvider objects
+    //  */
     /*
     public function findByExampleField($value)
     {

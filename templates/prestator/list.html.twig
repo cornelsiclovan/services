@@ -1,0 +1,24 @@
+
+<div class="row">
+
+    <div class="col-sm-12">
+        <table class="table">
+            <tr>
+                <td scope="col">#</td>
+                <th scope="col">Denumire </th>
+                <th scope="col">Descriere</th>
+            </tr>
+            {%  set i = 0 %}
+            {%  for service in services %}
+                {%  set i = i + 1 %}
+                <tr>
+                    <th scope="row">{{ i }}</th>
+                    <td><a href="{{ path('beneficiary_subservice_list', {'id' : service.id }) }}">{{ service.name }}</td>
+                    <td>{{ service.description}}</td>
+                </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+</div>
+

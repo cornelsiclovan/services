@@ -1,0 +1,25 @@
+
+    <div class="row">
+
+        <div class="col-sm-12">
+            <table class="table">
+                <tr>
+                    <td scope="col">#</td>
+                    <th scope="col">Denumire </th>
+                    <th scope="col">Descriere</th>
+                </tr>
+                {%  set i = 0 %}
+                {%  for subService in subServices %}
+                    {%  set i = i + 1 %}
+                    <tr>
+                        <th scope="row">{{ i }}</th>
+                        <td>{{ subService.name }}</td>
+                        <td>{{ subService.service }}</td>
+
+                    </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+

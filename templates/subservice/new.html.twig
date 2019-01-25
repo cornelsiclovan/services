@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <h1>Sub Servicii:</h1>
+        <div class="row">
+            <div class="col-xs-4">
+                {{ include ('/subservice/_form.html.twig', {'buttonText': 'Adaugă'})}}
+            </div>
+            <div class="col-xs-8">
+                {{ include ('/subservice/list.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        jQuery(document).ready(function() {
+            $('.js-remove-property').on('click', function (e) {
+                e.preventDefault();
+
+                var $el = $(this).closest('tr');
+                $(this).find('.fa-trash')
+                    .removeClass('fa-trash')
+                    .addClass('fa-spinner')
+                    .addClass('fa-spin');
+
+                $.ajax({
+                    url: $(this).data('url'),
+                    method: 'DELETE'
+                }).done(function () {
+                    $el.fadeOut();
+                });
+            });
+        });
+    </script>
+{% endblock %}

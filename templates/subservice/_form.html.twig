@@ -1,0 +1,5 @@
+{{ form_start(subServiceRegisterForm) }}
+     {{ form_row(subServiceRegisterForm.name, {'label' : 'Denumire: '}) }}
+     {{ form_row(subServiceRegisterForm.service, {'label' : 'Serviciu: '}) }}
+     <button type = "submit" class="btn btn-action" formnovalidate>{{ buttonText }}</button>
+{{ form_end(subServiceRegisterForm) }}
