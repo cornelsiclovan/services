@@ -1,0 +1,24 @@
+$(document).ready(function() {
+    var $serviceSelect = $('.js-service-form');
+    var $subServiceTarget = $('.js-sub-service-target');
+    $serviceSelect.on('change', function(e) {
+        console.log($serviceSelect.val());
+        $.ajax({
+            url: $serviceSelect.data('sub-service-url'),
+            data: {
+                service: $serviceSelect.val()
+            },
+            success: function (html) {
+                if (!html) {
+                    $subServiceTarget.find('select').remove();
+                    $subServiceTarget.addClass('d-none');
+                    return;
+                }
+                // Replace the current field and show
+                $subServiceTarget
+                    .html(html)
+                    .removeClass('d-none')
+            }
+        });
+    });
+});

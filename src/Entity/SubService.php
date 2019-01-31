@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,6 +32,16 @@ class SubService
      * @ORM\ManyToOne(targetEntity="App\Entity\ServiceProvider", inversedBy="subService")
      */
     private $serviceProvider;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\UserSubService", mappedBy="SubService")
+     */
+    private $userSubServices;
+
+    public function __construct()
+    {
+        $this->userSubServices = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -70,5 +82,37 @@ class SubService
         $this->serviceProvider = $serviceProvider;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|UserSubService[]
+     */
+    public function getUserSubServices(): Collection
+    {
+        return $this->userSubServices;
+    }
+
+    public function addUserSubService(UserSubService $userSubService): self
+    {
+        if (!$this->userSubServices->contains($userSubService)) {
+            $this->userSubServices[] = $userSubService;
+            $userSubService->addSubService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserSubService(UserSubService $userSubService): self
+    {
+        if ($this->userSubServices->contains($userSubService)) {
+            $this->userSubServices->removeElement($userSubService);
+            $userSubService->removeSubService($this);
+        }
+
+        return $this;
+    }
+
+    public function __toString(){
+        return $this->name;
     }
 }

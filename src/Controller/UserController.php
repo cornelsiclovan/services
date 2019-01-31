@@ -35,7 +35,7 @@ class UserController extends Controller
 
         if($form->isSubmitted()) {
             if ($form->isValid()) {
-                /**@var \App\Entity\Staff $staff */
+                /**@var \App\Entity\User $staff */
                 $user = $form->getData();
                 $this->listener->encodePassword($user);
                 $user->setRoles(['ROLE_USER']);

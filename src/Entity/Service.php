@@ -38,10 +38,16 @@ class Service
      */
     private $serviceProviders;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserSubService", mappedBy="service")
+     */
+    private $userSubServices;
+
     public function __construct()
     {
         $this->subServices = new ArrayCollection();
         $this->serviceProviders = new ArrayCollection();
+        $this->userSubServices = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -131,6 +137,37 @@ class Service
         if ($this->serviceProviders->contains($serviceProvider)) {
             $this->serviceProviders->removeElement($serviceProvider);
             $serviceProvider->removeService($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserSubService[]
+     */
+    public function getUserSubServices(): Collection
+    {
+        return $this->userSubServices;
+    }
+
+    public function addUserSubService(UserSubService $userSubService): self
+    {
+        if (!$this->userSubServices->contains($userSubService)) {
+            $this->userSubServices[] = $userSubService;
+            $userSubService->setService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserSubService(UserSubService $userSubService): self
+    {
+        if ($this->userSubServices->contains($userSubService)) {
+            $this->userSubServices->removeElement($userSubService);
+            // set the owning side to null (unless already changed)
+            if ($userSubService->getService() === $this) {
+                $userSubService->setService(null);
+            }
         }
 
         return $this;

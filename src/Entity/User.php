@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -93,6 +95,16 @@ class User implements UserInterface
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $client;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserSubService", mappedBy="user")
+     */
+    private $userSubServices;
+
+    public function __construct()
+    {
+        $this->userSubServices = new ArrayCollection();
+    }
     
 
 
@@ -346,6 +358,37 @@ class User implements UserInterface
     public function setClient(?bool $client): self
     {
         $this->client = $client;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserSubService[]
+     */
+    public function getUserSubServices(): Collection
+    {
+        return $this->userSubServices;
+    }
+
+    public function addUserSubService(UserSubService $userSubService): self
+    {
+        if (!$this->userSubServices->contains($userSubService)) {
+            $this->userSubServices[] = $userSubService;
+            $userSubService->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserSubService(UserSubService $userSubService): self
+    {
+        if ($this->userSubServices->contains($userSubService)) {
+            $this->userSubServices->removeElement($userSubService);
+            // set the owning side to null (unless already changed)
+            if ($userSubService->getUser() === $this) {
+                $userSubService->setUser(null);
+            }
+        }
 
         return $this;
     }

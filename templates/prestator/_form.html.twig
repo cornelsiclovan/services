@@ -1,0 +1,15 @@
+{{ form_start(selectServiceForm) }}
+    {{ form_row(selectServiceForm.service, {
+        attr: {
+            'data-sub-service-url': path('sub_service_select'),
+            class: 'js-service-form'
+        }
+    }) }}
+    <div class="js-sub-service-target">
+        {% if selectServiceForm.subService is defined %}
+            {{ form_row(selectServiceForm.subService) }}
+        {% endif %}
+    </div>
+
+<button type="submit" class="btn btn-primary">{{ button_text }}</button>
+{{ form_end(selectServiceForm) }}
