@@ -19,8 +19,8 @@ class UserRegistrationForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
          $builder
-             ->add('serviceProvider')
-             ->add('client')
+             ->add('isServiceProvider')
+             ->add('isClient')
              ->add('name')
              ->add('first_name')
              ->add('email')

@@ -13,7 +13,7 @@
                     {%  set i = i + 1 %}
                     <tr>
                         <th scope="row">{{ i }}</th>
-                        <td><a href="{{ path('beneficiary_subservice_list', {'id' : service.id }) }}">{{ service.name }}</td>
+                        <td>{{ service.name }}</td>
                         <td>{{ service.description}}</td>
 
                     </tr>

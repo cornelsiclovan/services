@@ -16,6 +16,7 @@ use App\Form\SubServiceRegisterForm;
 use App\Form\UserRegistrationForm;
 use App\Repository\ServiceRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,6 +45,8 @@ class ServiceProviderController extends AbstractController
     public function new(Request $request, EntityManagerInterface $em){
 
         $form = $this->createForm(ProviderSelectServiceType::class);
+
+        //dd($request);
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
@@ -129,5 +132,24 @@ class ServiceProviderController extends AbstractController
                 'selectServiceForm' => $form->createView(),
             ]
         );
+    }
+
+    /**
+     * @Route("/profile/user/serviceProvider/service/{id}/delete", name="provider_service_delete")
+     * @Method("DELETE")
+     */
+    public function delete($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $userSubService = $em->getRepository(UserSubService::class)->findOneBy(['id'=>$id]);
+
+        if(!$userSubService){
+            throw $this->createNotFoundException('Acest subserviciu nu a fost gasit');
+        }
+
+        $em->remove($userSubService);
+        $em->flush();
+
+        return new Response(null, 204);
     }
 }

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('js/service_provider_sub_service_select.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Solicita un serviciu nou:</h1>
+
+        {{ include('beneficiar/service/_form.html.twig',{
+            button_text: 'Create',
+        })
+        }}
+    </div>
+{% endblock %}

@@ -27,6 +27,17 @@
                         {{ subService.name }},
                     {% endfor %}
                     </td>
+                    <td><a  href="{{ path('provider_service_edit', {'id' : userSubService.id }) }}" class="btn btn-xs btn-success"><span class="fa fa-pencil"></span></a></td>
+                    <td>
+                        <a href="#"
+                           class="btn btn-link btn-xs pull-right js-remove-property"
+                           data-url="{{ path('provider_service_delete', {
+                               id: userSubService.id,
+                           }) }}"
+                        >
+                            <span class="fa fa-trash" style="color:palevioletred; font-size:24px"></span>
+                        </a>
+                    </td>
                 </tr>
             {% endfor %}
 
@@ -34,4 +45,9 @@
     </div>
 </div>
 </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('js/delete.js') }}"></script>
 {% endblock %}

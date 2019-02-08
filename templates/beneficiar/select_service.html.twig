@@ -1,9 +1,12 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <div class="container">
-        <h1>Alegeti un serviciu:</h1>
+        <h1>Lista de servicii solicitate:</h1>
+            <a href="{{ path('beneficiary_service_new') }}" class="btn btn-primary pull-right">
+                Adauga <span class="fa fa-plus-circle"></span>
+            </a>
 
-                {{ include ('/beneficiar/list.html.twig') }}
+            {{ include ('/beneficiar/list.html.twig') }}
 
         </div>
     </div>

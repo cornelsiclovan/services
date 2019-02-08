@@ -9,10 +9,10 @@
         <div class="row">
             <h2>
                 <ul>
-                    {% if user.client != null %}
+                    {% if user.isClient != null %}
                         <li><a href="{{ path('beneficiary_service_list') }}">Cont beneficiar</a></li>
                     {% endif %}
-                    {% if user.serviceProvider != null %}
+                    {% if user.isServiceProvider != null %}
                         <li><a href="{{ path('provider_service_list') }}">Cont prestator de servicii</a></li>
                     {% endif %}
                  </ul>

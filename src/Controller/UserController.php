@@ -38,7 +38,7 @@ class UserController extends Controller
                 /**@var \App\Entity\User $staff */
                 $user = $form->getData();
                 $this->listener->encodePassword($user);
-                $user->setRoles(['ROLE_USER']);
+                $user->setRoles(['ROLE_ADMIN']);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($user);
                 $em->flush();

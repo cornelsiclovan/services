@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UserSubServiceRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ClientSubServiceRepository")
  */
-class UserSubService
+class ClientSubService
 {
     /**
      * @ORM\Id()
@@ -19,23 +19,31 @@ class UserSubService
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="userSubServices")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="clientSubServices")
      */
     private $user;
 
-
-
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Service", inversedBy="userSubServices")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Service", inversedBy="clientSubServices")
      */
     private $service;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\SubService", inversedBy="userSubServices")
+     * @ORM\ManyToMany(targetEntity="App\Entity\SubService", inversedBy="clientSubServices")
      */
     private $subServices;
 
     private $subService;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $country;
 
     public function __construct()
     {
@@ -58,7 +66,6 @@ class UserSubService
 
         return $this;
     }
-
 
     public function getService(): ?Service
     {
@@ -98,6 +105,30 @@ class UserSubService
         return $this;
     }
 
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
     public function getSubService(){
         return $this->subServices;
     }
@@ -105,6 +136,4 @@ class UserSubService
     public function setSubService(Collection $subServices){
         $this->subServices = $subServices;
     }
-
-
 }

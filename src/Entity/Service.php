@@ -33,21 +33,23 @@ class Service
      */
     private $subServices;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\ServiceProvider", mappedBy="Services")
-     */
-    private $serviceProviders;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\UserSubService", mappedBy="service")
      */
     private $userSubServices;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ClientSubService", mappedBy="service")
+     */
+    private $clientSubServices;
+
+
     public function __construct()
     {
         $this->subServices = new ArrayCollection();
-        $this->serviceProviders = new ArrayCollection();
         $this->userSubServices = new ArrayCollection();
+        $this->clientSubServices = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -114,33 +116,7 @@ class Service
         return $this->name;
     }
 
-    /**
-     * @return Collection|ServiceProvider[]
-     */
-    public function getServiceProviders(): Collection
-    {
-        return $this->serviceProviders;
-    }
 
-    public function addServiceProvider(ServiceProvider $serviceProvider): self
-    {
-        if (!$this->serviceProviders->contains($serviceProvider)) {
-            $this->serviceProviders[] = $serviceProvider;
-            $serviceProvider->addService($this);
-        }
-
-        return $this;
-    }
-
-    public function removeServiceProvider(ServiceProvider $serviceProvider): self
-    {
-        if ($this->serviceProviders->contains($serviceProvider)) {
-            $this->serviceProviders->removeElement($serviceProvider);
-            $serviceProvider->removeService($this);
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|UserSubService[]
@@ -172,4 +148,36 @@ class Service
 
         return $this;
     }
+
+    /**
+     * @return Collection|ClientSubService[]
+     */
+    public function getClientSubServices(): Collection
+    {
+        return $this->clientSubServices;
+    }
+
+    public function addClientSubService(ClientSubService $clientSubService): self
+    {
+        if (!$this->clientSubServices->contains($clientSubService)) {
+            $this->clientSubServices[] = $clientSubService;
+            $clientSubService->setService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClientSubService(ClientSubService $clientSubService): self
+    {
+        if ($this->clientSubServices->contains($clientSubService)) {
+            $this->clientSubServices->removeElement($clientSubService);
+            // set the owning side to null (unless already changed)
+            if ($clientSubService->getService() === $this) {
+                $clientSubService->setService(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

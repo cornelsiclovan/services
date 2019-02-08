@@ -87,23 +87,29 @@ class User implements UserInterface
     private $roles;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $serviceProvider;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $client;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\UserSubService", mappedBy="user")
      */
     private $userSubServices;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isServiceProvider;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isClient;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ClientSubService", mappedBy="user")
+     */
+    private $clientSubServices;
+
     public function __construct()
     {
         $this->userSubServices = new ArrayCollection();
+        $this->clientSubServices = new ArrayCollection();
     }
     
 
@@ -338,29 +344,6 @@ class User implements UserInterface
         $this->password = null;
     }
 
-    public function getServiceProvider(): ?bool
-    {
-        return $this->serviceProvider;
-    }
-
-    public function setServiceProvider(?bool $serviceProvider): self
-    {
-        $this->serviceProvider = $serviceProvider;
-
-        return $this;
-    }
-
-    public function getClient(): ?bool
-    {
-        return $this->client;
-    }
-
-    public function setClient(?bool $client): self
-    {
-        $this->client = $client;
-
-        return $this;
-    }
 
     /**
      * @return Collection|UserSubService[]
@@ -391,5 +374,66 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    public function getIsServiceProvider(): ?bool
+    {
+        return $this->isServiceProvider;
+    }
+
+    public function setIsServiceProvider(bool $isServiceProvider): self
+    {
+        $this->isServiceProvider = $isServiceProvider;
+
+        return $this;
+    }
+
+    public function getIsClient(): ?bool
+    {
+        return $this->isClient;
+    }
+
+    public function setIsClient(bool $isClient): self
+    {
+        $this->isClient = $isClient;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ClientSubService[]
+     */
+    public function getClientSubServices(): Collection
+    {
+        return $this->clientSubServices;
+    }
+
+    public function addClientSubService(ClientSubService $clientSubService): self
+    {
+        if (!$this->clientSubServices->contains($clientSubService)) {
+            $this->clientSubServices[] = $clientSubService;
+            $clientSubService->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClientSubService(ClientSubService $clientSubService): self
+    {
+        if ($this->clientSubServices->contains($clientSubService)) {
+            $this->clientSubServices->removeElement($clientSubService);
+            // set the owning side to null (unless already changed)
+            if ($clientSubService->getUser() === $this) {
+                $clientSubService->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+    public function __toString()
+    {
+       return $this->getName();
     }
 }

@@ -7,8 +7,10 @@
  */
 
 namespace App\Controller;
+use App\Entity\ClientSubService;
 use App\Entity\Service;
 use App\Entity\SubService;
+use App\Form\ClientServiceFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,15 +33,39 @@ class BeneficiaryController extends AbstractController
     }
 
     /**
-     * @Route("/profile/user/beneficiary/subservice/list/{id}", name="beneficiary_subservice_list")
+     * @Route("/profile/user/beneficiary/service/new", name="beneficiary_service_new")
      */
-    public function selectSubService(Request $request, EntityManagerInterface $em, Service $service){
-        $repository = $em->getRepository(SubService::class);
-        $subServices = $repository->findBy(['service' => $service]);
+    public function new(Request $request, EntityManagerInterface $em){
+        $form = $this->createForm(ClientServiceFormType::class);
+        $form->handleRequest($request);
 
-        return $this->render('beneficiar/subservice/select.html.twig',
-            [
-                'subServices' => $subServices,
-            ]);
+
+
+        if($form->isSubmitted() && $form->isValid()){
+            /** @var ClientSubService $clientServiceRequest|null */
+
+            $clientServiceRequest = $form->getData();
+
+            dd($clientServiceRequest);
+            $user = $this->getUser();
+            $clientServiceRequest->setUser($user);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($clientServiceRequest);
+            $em->flush();
+
+            $this->addFlash(
+                'success',
+                sprintf('Solicitare adaugata!')
+            );
+
+           return $this->redirectToRoute('beneficiary_service_list');
+        }
+
+        return $this->render(
+            'beneficiar/service/new.html.twig',[
+                'lookForService' => $form->createView(),
+            ]
+        );
     }
+
 }

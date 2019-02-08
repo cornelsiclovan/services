@@ -2,14 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\ClientSubService;
 use App\Entity\Service;
 use App\Entity\SubService;
-use App\Entity\User;
-use App\Entity\UserSubService;
-use App\Repository\SubServiceRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use function Symfony\Bridge\Twig\Extension\twig_is_selected_choice;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,26 +15,32 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProviderSelectServiceType extends AbstractType
+class ClientServiceFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        /** @var UserSubService|null $userSubService */
-        $userSubService = $options['data'] ?? null;
+        $cities = ['Timisoara' => 'Timisoara'];
 
         $builder
             ->add('service', EntityType::class,[
                 'placeholder' => 'Alegeti un serviciu',
                 'class' => Service::class,
             ])
+            ->add('city', ChoiceType::class,[
+                'choices' => $cities
+            ])
+            ->add('country', ChoiceType::class, [
+                'choices' => [
+                    'Romania' => 'Romania'
+                ]
+            ])
         ;
 
         $builder->addEventListener(
             FormEvents::POST_SET_DATA,
-             function(FormEvent $event){
-                /** @var UserSubService|null $data */
+            function(FormEvent $event){
+                /** @var ClientSubService|null $data */
                 $data = $event->getData();
-
                 if(!$data){
                     return;
                 }
@@ -45,7 +48,7 @@ class ProviderSelectServiceType extends AbstractType
                     $event->getForm(),
                     $data->getService()
                 );
-             }
+            }
         );
 
         $builder->get('service')->addEventListener(
@@ -53,8 +56,8 @@ class ProviderSelectServiceType extends AbstractType
             function(FormEvent $event){
                 $form = $event->getForm();
                 $this->setupSubServicesField(
-                   $form->getParent(),
-                   $form->getData()
+                    $form->getParent(),
+                    $form->getData()
                 );
             }
         );
@@ -63,7 +66,7 @@ class ProviderSelectServiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => UserSubService::class
+            'data_class' => ClientSubService::class,
         ]);
     }
 
@@ -94,5 +97,3 @@ class ProviderSelectServiceType extends AbstractType
 
     }
 }
-
-
