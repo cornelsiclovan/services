@@ -9,13 +9,16 @@
                     <th scope="col">Descriere</th>
                 </tr>
                 {%  set i = 0 %}
-                {%  for service in services %}
+                {%  for clientService in clientServices %}
                     {%  set i = i + 1 %}
                     <tr>
                         <th scope="row">{{ i }}</th>
-                        <td>{{ service.name }}</td>
-                        <td>{{ service.description}}</td>
-
+                        <td>{{ clientService.service }}</td>
+                        <td>
+                        {% for subService in clientService.subServices %}
+                             {{ subService.name }}
+                       {% endfor %}
+                        </td>
                     </tr>
                 {% endfor %}
 

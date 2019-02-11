@@ -1,13 +1,13 @@
 {{ form_start(lookForService) }}
     {{ form_row(lookForService.service,{
         attr: {
-        'data-sub-service-url': path('sub_service_select'),
+        'data-sub-service-url': path('beneficiar_service_select'),
         class: 'js-service-form'
         }}) }}
 
     <div class="js-sub-service-target">
-        {% if selectServiceForm.subService is defined %}
-            {{ form_row(selectServiceForm.subServices) }}
+        {% if lookForService.subService is defined %}
+            {{ form_row(lookForService.subServices) }}
         {% endif %}
     </div>
     {{ form_row(lookForService.country) }}

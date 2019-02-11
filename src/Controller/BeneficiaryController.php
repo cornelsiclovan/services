@@ -11,6 +11,7 @@ use App\Entity\ClientSubService;
 use App\Entity\Service;
 use App\Entity\SubService;
 use App\Form\ClientServiceFormType;
+use App\Repository\ServiceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,12 +23,12 @@ class BeneficiaryController extends AbstractController
      * @Route("/profile/user/beneficiary/service/list/", name="beneficiary_service_list")
      */
     public function selectService(Request $request, EntityManagerInterface $em){
-        $repository = $em->getRepository(Service::class);
-        $services = $repository->findAll();
+        $repository = $em->getRepository(ClientSubService::class);
+        $clientServices = $repository->findAll();
 
         return $this->render('beneficiar/select_service.html.twig',
                 [
-                    'services' => $services,
+                    'clientServices' => $clientServices,
                 ]
             );
     }
@@ -46,7 +47,6 @@ class BeneficiaryController extends AbstractController
 
             $clientServiceRequest = $form->getData();
 
-            dd($clientServiceRequest);
             $user = $this->getUser();
             $clientServiceRequest->setUser($user);
             $em = $this->getDoctrine()->getManager();
@@ -63,6 +63,37 @@ class BeneficiaryController extends AbstractController
 
         return $this->render(
             'beneficiar/service/new.html.twig',[
+                'lookForService' => $form->createView(),
+            ]
+        );
+    }
+
+    /**
+     * @Route("/profile/user/beneficiar/service/select", name="beneficiar_service_select")
+     */
+    public function getSubServiceSelect(Request $request, ServiceRepository $serviceRepository)
+    {
+        $clientSubService = new ClientSubService();
+        $service = $serviceRepository->findOneBy(['id' => $request->query->get('service')]);
+
+
+        $clientSubService->setUser($this->getUser());
+        $clientSubService->setService($service);
+
+
+
+        $form = $this->createForm(ClientServiceFormType::class, $clientSubService);
+
+
+
+        if(!$form->has('subService')){
+            return new \Symfony\Component\HttpFoundation\Response(null, 204);
+        }
+
+
+
+        return $this->render(
+            'beneficiar/service/_subservice_select.html.twig',[
                 'lookForService' => $form->createView(),
             ]
         );

@@ -3,6 +3,7 @@ $(document).ready(function() {
     var $subServiceTarget = $('.js-sub-service-target');
     $serviceSelect.on('change', function(e) {
         console.log($serviceSelect.val());
+        console.log($serviceSelect.data('sub-service-url'))
         $.ajax({
             url: $serviceSelect.data('sub-service-url'),
             data: {
