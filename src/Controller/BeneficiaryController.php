@@ -13,8 +13,10 @@ use App\Entity\SubService;
 use App\Form\ClientServiceFormType;
 use App\Repository\ServiceRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BeneficiaryController extends AbstractController
@@ -24,7 +26,7 @@ class BeneficiaryController extends AbstractController
      */
     public function selectService(Request $request, EntityManagerInterface $em){
         $repository = $em->getRepository(ClientSubService::class);
-        $clientServices = $repository->findAll();
+        $clientServices = $repository->findBy(['user' => $this->getUser()]);
 
         return $this->render('beneficiar/select_service.html.twig',
                 [
@@ -66,6 +68,54 @@ class BeneficiaryController extends AbstractController
                 'lookForService' => $form->createView(),
             ]
         );
+    }
+
+    /**
+     * @Route("/profile/user/beneficiary/service/{id}/edit", name="client_service_edit")
+     */
+    public function edit(Request $request, EntityManagerInterface $em, ClientSubService $clientSubService)
+    {
+        $form = $this->createForm(ClientServiceFormType::class, $clientSubService);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            /** @var ClientSubService|null $clientSubService */
+            $clientSubService = $form->getData();
+            $clientSubService->setUser($this->getUser());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($clientSubService);
+            $em->flush();
+
+            $this->addFlash(
+                'success',
+                sprintf('Activitate modificata!')
+            );
+        }
+
+        return $this->render(
+            'beneficiar/service/edit.html.twig',[
+                'lookForService' => $form->createView(),
+            ]
+        );
+    }
+
+    /**
+     * @Route("/profile/user/beneficiary/service/{id}/delete", name="client_service_delete")
+     * @Method("DELETE")
+     */
+    public function delete($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $clientSubService = $em->getRepository(ClientSubService::class)->findOneBy(['id' => $id]);
+
+        if(!$clientSubService){
+            throw $this->createNotFoundException('Acest serviciu nu a fost gasit');
+        }
+
+        $em->remove($clientSubService);
+        $em->flush();
+
+        return new Response(null, 204);
     }
 
     /**
