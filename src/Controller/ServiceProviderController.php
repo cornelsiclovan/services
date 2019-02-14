@@ -8,14 +8,20 @@
 
 namespace App\Controller;
 
-use App\Entity\ServiceProvider;
+use App\Entity\ClientSubService;
 use App\Entity\User;
 use App\Entity\UserSubService;
+use App\Form\ClientServiceFormType;
 use App\Form\ProviderSelectServiceType;
 use App\Form\SubServiceRegisterForm;
 use App\Form\UserRegistrationForm;
+use App\Repository\ClientSubServiceRepository;
 use App\Repository\ServiceRepository;
+use App\Repository\UserSubServiceRepository;
+use function array_diff;
+use function array_intersect;
 use Doctrine\ORM\EntityManagerInterface;
+use function dump;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,7 +33,7 @@ class ServiceProviderController extends AbstractController
     /**
      * @Route("/profile/user/serviceProvider/service/list", name="provider_service_list")
      */
-    public function list(Request $request, EntityManagerInterface $em){
+    public function list(EntityManagerInterface $em){
         $repository = $em->getRepository(UserSubService::class);
         $user = $this->getUser();
         $userSubServices = $repository->findBy(['user' => $user]);
@@ -35,6 +41,76 @@ class ServiceProviderController extends AbstractController
         return $this->render(
             'prestator/list_service.html.twig', [
                 'userSubServices' => $userSubServices,
+            ]
+        );
+    }
+
+    /**
+     * @Route("/profile/user/serviceProvider/menu", name="provider_menu")
+     */
+    public function menu(){
+        return $this->render(
+            'prestator/menu.html.twig'
+        );
+    }
+
+    /**
+     * @Route("profile/user/serviceProvider/client/requests", name="client_service_request_list")
+     */
+    public function clientRequests(EntityManagerInterface $em)
+    {
+        $user = $this->getUser();
+
+        $repository = $em->getRepository(ClientSubService::class);
+        $clientSubServices = $repository->findAll();
+
+        $repository = $em->getRepository(UserSubService::class);
+        $userSubServices = $repository->findBy(['user'=>$user]);
+
+
+        $finalClientSubServices = [];
+        $finalProviderSubServices = [];
+
+        /***
+        foreach ($clientSubServices as $clientSubService) {
+            foreach ($clientSubService->getSubServices() as $cSubService) {
+                $finalClientSubServices[] = $cSubService;
+            }
+        }
+
+        foreach($userSubServices as $userSubService){
+            foreach($userSubService->getSubServices() as $spSubService){
+                $finalProviderSubServices[] = $spSubService;
+            }
+        }
+
+        if(array_intersect($finalProviderSubServices, $finalClientSubServices) == $finalProviderSubServices){
+          //dump(array_intersect($finalClientSubServices, $finalProviderSubServices));
+        }
+
+        //dump($finalProviderSubServices);
+        //dump($finalClientSubServices);
+       // die;
+**/
+
+        foreach ($clientSubServices as $clientSubService) {
+            foreach ($clientSubService->getSubServices() as $cSubService) {
+                foreach($userSubServices as $userSubService){
+                    foreach($userSubService->getSubServices() as $spSubService){
+                        if($cSubService === $spSubService) {
+                            if (!in_array($clientSubService, $finalClientSubServices)) {
+                                $finalClientSubServices[] = $clientSubService;
+                            }
+                        }
+                   }
+                }
+            }
+        }
+
+
+        return $this->render('prestator/client/list.html.twig',
+            [
+                'clientServices' => $finalClientSubServices,
             ]
         );
     }
@@ -151,5 +227,21 @@ class ServiceProviderController extends AbstractController
         $em->flush();
 
         return new Response(null, 204);
+    }
+
+    /**
+     * @Route("/profile/user/serviceProvider/service/{id}/show", name="provider_service_show")
+     */
+    public function show($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $clientSubService = $em->getRepository(ClientSubService::class)->findOneBy(['id'=>$id]);
+
+        return $this->render(
+            'prestator/client/detail.html.twig', [
+                'clientServiceRequest' => $clientSubService
+            ]
+
+        );
     }
 }

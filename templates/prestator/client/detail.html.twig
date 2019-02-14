@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <h1>Serviciu solicitat:</h1>
+        Serviciu: {{ clientServiceRequest.service }}
+        <br/>
+        Subservicii:
+            {% for subService in clientServiceRequest.subServices %}
+                {{ subService.name }}
+            {% endfor %}
+        <br/>
+        Client:
+            {{ clientServiceRequest.user }}
+        <br/>
+        Oras:
+            {{ clientServiceRequest.country }}, {{ clientServiceRequest.city }}
+    </div>
+{% endblock %}
+{% block javascripts %}
+{% endblock %}

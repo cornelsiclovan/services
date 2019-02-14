@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <h1>Utilizator</h1>
+        </div>
+        <div class="row">
+            <h2>
+                <ul>
+                        <li><a href="{{ path('provider_service_list') }}">Lista servicii prestate</a></li>
+                        <li><a href="{{ path('client_service_request_list') }}">Lista servicii solicitate</a></li>
+                </ul>
+            </h2>
+        </div>
+    </div>
+{% endblock %}

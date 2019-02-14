@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <h1>Lista de servicii solicitate:</h1>
+        <a href="{{ path('beneficiary_service_new') }}" class="btn btn-primary pull-right">
+            Adauga <span class="fa fa-plus-circle"></span>
+        </a>
+
+        <div class="row">
+
+            <div class="col-sm-12">
+                <table class="table">
+                    <tr>
+                        <td scope="col">#</td>
+                        <th scope="col">Denumire </th>
+                        <th scope="col">Descriere</th>
+                        <th scope="col">Nume client</th>
+                    </tr>
+                    {%  set i = 0 %}
+                    {%  for clientService in clientServices %}
+                        {%  set i = i + 1 %}
+                        <tr>
+                            <th scope="row">{{ i }}</th>
+                            <td><a href="{{ path('provider_service_show', {'id' : clientService.id}) }}">{{ clientService.service }}</a></td>
+                            <td>
+                                {% for subService in clientService.subServices %}
+                                    {{ subService.name }},
+                                {% endfor %}
+                            </td>
+                            <td>
+                                {{ clientService.user }}
+                            </td>
+                            <td><a  href="{{ path('client_service_edit', {'id' : clientService.id }) }}" class="btn btn-xs btn-success"><span class="fa fa-pencil"></span></a></td>
+                            <td>
+                                <a href="#"
+                                   class="btn btn-link btn-xs pull-right js-remove-property"
+                                   data-url="{{ path('client_service_delete', {
+                                       id: clientService.id,
+                                   }) }}"
+                                >
+                                    <span class="fa fa-trash" style="color:palevioletred; font-size:24px"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+
+
+    <script src="{{ asset('js/delete.js') }}"></script>
+{% endblock %}

@@ -4,7 +4,7 @@
 
     <div class="container">
         <div class="row">
-            <h1>Client</h1>
+            <h1>Utilizator</h1>
         </div>
         <div class="row">
             <h2>
@@ -13,7 +13,7 @@
                         <li><a href="{{ path('beneficiary_service_list') }}">Cont beneficiar</a></li>
                     {% endif %}
                     {% if user.isServiceProvider != null %}
-                        <li><a href="{{ path('provider_service_list') }}">Cont prestator de servicii</a></li>
+                        <li><a href="{{ path('provider_menu') }}">Cont prestator de servicii</a></li>
                     {% endif %}
                  </ul>
             </h2>

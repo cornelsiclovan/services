@@ -16,7 +16,7 @@
                     <td>{{ clientService.service }}</td>
                     <td>
                     {% for subService in clientService.subServices %}
-                         {{ subService.name }}
+                         {{ subService.name }},
                    {% endfor %}
                     </td>
                     <td><a  href="{{ path('client_service_edit', {'id' : clientService.id }) }}" class="btn btn-xs btn-success"><span class="fa fa-pencil"></span></a></td>
