@@ -106,10 +106,16 @@ class User implements UserInterface
      */
     private $clientSubServices;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Commment", mappedBy="author")
+     */
+    private $commments;
+
     public function __construct()
     {
         $this->userSubServices = new ArrayCollection();
         $this->clientSubServices = new ArrayCollection();
+        $this->commments = new ArrayCollection();
     }
     
 
@@ -435,5 +441,36 @@ class User implements UserInterface
     public function __toString()
     {
        return $this->getFirstName().' '.$this->getName();
+    }
+
+    /**
+     * @return Collection|Commment[]
+     */
+    public function getCommments(): Collection
+    {
+        return $this->commments;
+    }
+
+    public function addCommment(Commment $commment): self
+    {
+        if (!$this->commments->contains($commment)) {
+            $this->commments[] = $commment;
+            $commment->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommment(Commment $commment): self
+    {
+        if ($this->commments->contains($commment)) {
+            $this->commments->removeElement($commment);
+            // set the owning side to null (unless already changed)
+            if ($commment->getAuthor() === $this) {
+                $commment->setAuthor(null);
+            }
+        }
+
+        return $this;
     }
 }

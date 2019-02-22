@@ -14,6 +14,41 @@
         <br/>
         Oras:
             {{ clientServiceRequest.country }}, {{ clientServiceRequest.city }}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h3><i class="pr-3 fa fa-comment"></i>5 Comments</h3>
+                <hr>
+
+                <div class="row mb-5">
+                    <div class="col-sm-12">
+                        <img class="comment-img rounded-circle" src="{{ asset('images/alien-profile.png') }}">
+                        <div class="comment-container d-inline-block pl-3 align-top">
+                            <span class="commenter-name">Amy Oort</span>
+                            {{ include('user/comment/_form.html.twig', {'buttonText':'Trimite'}) }}
+                        </div>
+                    </div>
+                </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <img class="comment-img rounded-circle" src="{{ asset('images/alien-profile.png') }}">
+                            <div class="comment-container d-inline-block pl-3 align-top">
+                                <span class="commenter-name">Cornel Siclovan</span>
+                                <small>about 5 months ago</small>
+
+                                <br>
+                                <span class="comment"> continut comentariu</span>
+                                <p><a href="#">Reply</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+        </div>
+
     </div>
 {% endblock %}
 {% block javascripts %}

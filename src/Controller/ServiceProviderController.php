@@ -12,6 +12,7 @@ use App\Entity\ClientSubService;
 use App\Entity\User;
 use App\Entity\UserSubService;
 use App\Form\ClientServiceFormType;
+use App\Form\CommentFormType;
 use App\Form\ProviderSelectServiceType;
 use App\Form\SubServiceRegisterForm;
 use App\Form\UserRegistrationForm;
@@ -237,9 +238,12 @@ class ServiceProviderController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $clientSubService = $em->getRepository(ClientSubService::class)->findOneBy(['id'=>$id]);
 
+        $form = $this->createForm(CommentFormType::class);
+
         return $this->render(
             'prestator/client/detail.html.twig', [
-                'clientServiceRequest' => $clientSubService
+                'clientServiceRequest' => $clientSubService,
+                'commentForm' => $form->createView(),
             ]
 
         );

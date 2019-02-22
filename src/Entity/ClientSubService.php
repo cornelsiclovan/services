@@ -45,9 +45,15 @@ class ClientSubService
      */
     private $country;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Commment", mappedBy="clientSubService")
+     */
+    private $commments;
+
     public function __construct()
     {
         $this->subServices = new ArrayCollection();
+        $this->commments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -135,5 +141,36 @@ class ClientSubService
 
     public function setSubService(Collection $subServices){
         $this->subServices = $subServices;
+    }
+
+    /**
+     * @return Collection|Commment[]
+     */
+    public function getCommments(): Collection
+    {
+        return $this->commments;
+    }
+
+    public function addCommment(Commment $commment): self
+    {
+        if (!$this->commments->contains($commment)) {
+            $this->commments[] = $commment;
+            $commment->setClientSubService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommment(Commment $commment): self
+    {
+        if ($this->commments->contains($commment)) {
+            $this->commments->removeElement($commment);
+            // set the owning side to null (unless already changed)
+            if ($commment->getClientSubService() === $this) {
+                $commment->setClientSubService(null);
+            }
+        }
+
+        return $this;
     }
 }
