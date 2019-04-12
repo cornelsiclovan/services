@@ -1,0 +1,11 @@
+easy_admin:
+    entities:
+        Service:
+         # List the entity class name you want to manage
+            class: App\Entity\Service
+        UserSubService:
+            class: App\Entity\SubService
+        ClientSubService:
+            class: App\Entity\ClientSubService
+
+

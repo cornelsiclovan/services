@@ -43,7 +43,7 @@ class MainController extends AbstractController
 
     }
     /**
-     * @Route("/admin/", name="admin_homepage")
+     * @Route("/admin_from_app/", name="admin_homepage")
      */
     public function adminHomePage(){
         return $this->render('admin/start.html.twig');
