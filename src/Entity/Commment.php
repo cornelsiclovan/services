@@ -2,10 +2,15 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommmentRepository")
+ * @ApiResource(
+ *     itemOperations={},
+ *     collectionOperations={}
+ * )
  */
 class Commment
 {

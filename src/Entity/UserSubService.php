@@ -6,11 +6,34 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserSubServiceRepository")
- * @ApiResource()
+ * @ApiResource(
+ *     itemOperations={
+ *          "get"={
+                 "access_control"="is_granted('ROLE_SERVICE_PROVIDER') and object.getUser() == user",
+ *               "access_control_message"="You do not have permissions for this resource"
+ *          },
+ *          "put"={
+ *               "access_control"="is_granted('ROLE_SERVICE_PROVIDER') and object.getUser() == user",
+ *               "access_control_message"="You do not have permissions for this resource",
+ *               "denormalization_context"={
+ *                  "groups"={"put"}
+ *              }
+ *           },
+ *          "post"
+ *     },
+ *     collectionOperations={
+ *          "post"={
+ *              "access_control"="is_granted('ROLE_SERVICE_PROVIDER')",
+ *              "access_control_message"="You do not have permissions for this resource"
+ *          }
+ *     }
+ * )
  */
 class UserSubService
 {
@@ -30,11 +53,13 @@ class UserSubService
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Service", inversedBy="userSubServices")
+     * @Assert\NotBlank()
      */
     private $service;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\SubService", inversedBy="userSubServices")
+     * @Groups({"put"})
      */
     private $subServices;
 

@@ -11,11 +11,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ServiceRepository")
  * @ApiResource(
- *     itemOperations={"get"},
+ *     itemOperations={
+ *          "get",
+ *          "post"={
+ *              "access_control"="is_granted('ROLE_ADMIN')"
+ *          }
+ *     },
  *     collectionOperations={
  *          "get",
  *          "post"={
- *              "access_control"="is_granted('IS_AUTHENTICATED_FULLY')"
+ *              "access_control"="is_granted('ROLE_ADMIN')"
  *          }
  *     }
  * )

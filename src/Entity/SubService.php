@@ -11,11 +11,18 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SubServiceRepository")
  * @ApiResource(
- *     itemOperations={"get"},
- *     collectionOperations={
+ *     itemOperations={
  *          "get",
  *          "post"={
- *              "access_control"="is_granted('IS_AUTHENTICATED_FULLY')"
+ *              "access_control"="is_granted('ROLE_ADMIN')"
+ *          },
+ *          "put"
+ *      },
+ *     collectionOperations={
+ *          "get",
+ *          "put",
+ *          "post"={
+ *              "access_control"="is_granted('ROLE_ADMIN')"
  *          }
  *     }
  * )
@@ -37,6 +44,7 @@ class SubService
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Service", inversedBy="subServices")
+     * @Assert\NotBlank()
      */
     private $service;
 

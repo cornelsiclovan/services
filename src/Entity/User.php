@@ -6,20 +6,33 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ApiResource(
  *     itemOperations={
  *          "get"={
-                "access_control"="is_granted('IS_AUTHENTICATED_FULLY')"
- *          }
+ *              "access_control"="is_granted('IS_AUTHENTICATED_FULLY') and object == user",
+ *              "access_control_message"="You do not have permission for this resource"
+ *          },
+ *          "post"
  *      },
  *     collectionOperations={
+ *          "get"={
+                "access_control"="is_granted('ROLE_ADMIN')",
+ *              "access_control_message"="You do not have permissions for this resource"
+ *          },
  *          "post"
+ *     },
+ *     normalizationContext={
+ *          "groups"={"read"}
  *     }
  * )
+ * @UniqueEntity("email")
  */
 class User implements UserInterface
 {
@@ -27,106 +40,162 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank()
+     * @Groups({"read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\NotBlank()
+     * @Groups({"read"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank()
+     * @Assert\Email()
+     * @Groups({"read"})
+     * @Assert\Length(min=6, max=255)
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank()
+     * @Groups({"read"})
      */
     private $telephone;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank()
+     * @Groups({"read"})
      */
     private $country;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank()
+     * @Groups({"read"})
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank()
+     * @Groups({"read"})
      */
     private $street;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
+     * @Groups({"read"})
      */
     private $number;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
+     * @Groups({"read"})
      */
     private $building;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Groups({"read"})
      */
     private $staircase;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
+     * @Groups({"read"})
      */
     private $apartment;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
+     * @Assert\Regex(
+     *     pattern="/(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{7,}/",
+     *     message="Passwords must be seven characters long and contain at least one digit, one uppercase letter and one lowecase letter"
+     * )
      */
     private $password;
 
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Expression(
+     *     "this.getPassword() === this.getPlainPassword()",
+     *     message="Passwords do not match"
+     * )
+     */
     private $plainPassword;
 
     /**
      * @ORM\Column(type="json_array")
+     * @Groups({"read"})
      */
     private $roles;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\UserSubService", mappedBy="user")
+     * @Groups({"read"})
      */
     private $userSubServices;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Assert\Expression(
+     *     "!this.getIsServiceProvider()==false || !this.getIsClient()==false",
+     *     message="Please select one of the two options(client or service provider)"
+     * )
+     * @Groups({"read"})
      */
     private $isServiceProvider;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"read"})
      */
     private $isClient;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ClientSubService", mappedBy="user")
+     * @Groups({"read"})
      */
     private $clientSubServices;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Commment", mappedBy="author")
+     * @Groups({"read"})
      */
     private $commments;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @Groups({"read"})
+     */
+    private $enabled;
+
+    /**
+     * @ORM\Column(type="string", length=40, nullable=true)
+     */
+    private $confirmationToken;
 
     public function __construct()
     {
         $this->userSubServices = new ArrayCollection();
         $this->clientSubServices = new ArrayCollection();
         $this->commments = new ArrayCollection();
+        $this->enabled = false;
+        $this->confirmationToken = null;
     }
     
 
@@ -358,7 +427,7 @@ class User implements UserInterface
 
     public function setPlainPassword($plainPassword){
         $this->plainPassword = $plainPassword;
-        $this->password = null;
+        //$this->password = null;
     }
 
 
@@ -483,5 +552,25 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+    }
+
+    public function getConfirmationToken()
+    {
+        return $this->confirmationToken;
+    }
+
+    public function setConfirmationToken($confirmationToken)
+    {
+        $this->confirmationToken = $confirmationToken;
     }
 }

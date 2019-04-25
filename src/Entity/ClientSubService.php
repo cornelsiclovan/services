@@ -10,7 +10,24 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ClientSubServiceRepository")
- * @ApiResource()
+ * @ApiResource(
+ *     itemOperations={
+ *          "get",
+ *          "put"={
+ *              "access_control"="is_granted('ROLE_CLIENT') and object.getUser() == user",
+ *              "access_control_message"="You do not have permissions for this resource"
+ *          }
+ *     },
+ *     collectionOperations={
+ *          "get"={
+ *              "access_control"="is_granted('ROLE_SERVICE_PROVIDER')"
+ *          },
+ *          "post"={
+ *              "access_control"="is_granted('ROLE_CLIENT')",
+ *              "access_control_message"="You do not have permissions for this resource"
+ *          }
+ *     }
+ * )
  */
 class ClientSubService
 {
@@ -28,6 +45,7 @@ class ClientSubService
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Service", inversedBy="clientSubServices")
+     * @Assert\NotBlank()
      */
     private $service;
 
