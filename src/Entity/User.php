@@ -18,8 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          "get"={
  *              "access_control"="is_granted('IS_AUTHENTICATED_FULLY') and object == user",
  *              "access_control_message"="You do not have permission for this resource"
- *          },
- *          "post"
+ *          }
  *      },
  *     collectionOperations={
  *          "get"={

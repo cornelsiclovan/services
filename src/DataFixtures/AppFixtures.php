@@ -153,6 +153,7 @@ class AppFixtures extends Fixture
         $user->setRoles(["ROLE_ADMIN"]);
         $user->setIsClient(false);
         $user->setIsServiceProvider(false);
+        $user->setEnabled(true);
 
         $user->setPassword(
             $this->passwordEncoder->encodePassword($user,"Secret123#")
@@ -177,9 +178,10 @@ class AppFixtures extends Fixture
         $user->setBuilding($this->faker->numberBetween(0, 10));
         $user->setStaircase($this->faker->numberBetween(0, 10));
         $user->setApartment($this->faker->numberBetween(0, 10));
-        $user->setRoles(["ROLE_USER"]);
+        $user->setRoles(["ROLE_USER", "ROLE_SERVICE_PROVIDER"]);
         $user->setIsServiceProvider(true);
         $user->setIsClient(false);
+        $user->setEnabled(true);
 
         $user->setPassword(
             $this->passwordEncoder->encodePassword($user,"Secret123#")
@@ -204,9 +206,11 @@ class AppFixtures extends Fixture
         $user->setBuilding($this->faker->numberBetween(0, 10));
         $user->setStaircase($this->faker->numberBetween(0, 10));
         $user->setApartment($this->faker->numberBetween(0, 10));
-        $user->setRoles(["ROLE_USER"]);
+        $user->setRoles(["ROLE_USER", "ROLE_CLIENT"]);
         $user->setIsServiceProvider(false);
         $user->setIsClient(true);
+        $user->setEnabled(true);
+
 
         $user->setPassword(
             $this->passwordEncoder->encodePassword($user,"Secret123#")
@@ -233,6 +237,7 @@ class AppFixtures extends Fixture
         $user->setRoles(["ROLE_USER"]);
         $user->setIsServiceProvider(false);
         $user->setIsClient(true);
+        $user->setEnabled(true);
 
 
         $user->setPassword(
@@ -260,6 +265,7 @@ class AppFixtures extends Fixture
         $user->setRoles(["ROLE_USER"]);
         $user->setIsServiceProvider(true);
         $user->setIsClient(false);
+        $user->setEnabled(true);
 
         $user->setPassword(
             $this->passwordEncoder->encodePassword($user,"Secret123#")

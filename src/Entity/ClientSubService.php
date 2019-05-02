@@ -14,8 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     itemOperations={
  *          "get",
  *          "put"={
- *              "access_control"="is_granted('ROLE_CLIENT') and object.getUser() == user",
- *              "access_control_message"="You do not have permissions for this resource"
+ *              "access_control"="is_granted('edit_for_clien', object) and object.getUser() == user",
+ *              "access_control_message"="You do not have permissions for this resource, or you are trying to insert wrong values"
  *          }
  *     },
  *     collectionOperations={
@@ -23,8 +23,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *              "access_control"="is_granted('ROLE_SERVICE_PROVIDER')"
  *          },
  *          "post"={
- *              "access_control"="is_granted('ROLE_CLIENT')",
- *              "access_control_message"="You do not have permissions for this resource"
+ *              "access_control"="is_granted('create_for_client', object)",
+ *              "access_control_message"="You do not have permissions for this resource, or you are trying to insert wrong values"
  *          }
  *     }
  * )

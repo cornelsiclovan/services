@@ -19,18 +19,17 @@ use Symfony\Component\Validator\Constraints as Assert;
  *               "access_control_message"="You do not have permissions for this resource"
  *          },
  *          "put"={
- *               "access_control"="is_granted('ROLE_SERVICE_PROVIDER') and object.getUser() == user",
- *               "access_control_message"="You do not have permissions for this resource",
+ *               "access_control"="is_granted('edit_for_provider', object) and object.getUser() == user",
+ *               "access_control_message"="You do not have permissions for this resource or you are trying to insert wrong values",
  *               "denormalization_context"={
  *                  "groups"={"put"}
  *              }
- *           },
- *          "post"
+ *           }
  *     },
  *     collectionOperations={
  *          "post"={
- *              "access_control"="is_granted('ROLE_SERVICE_PROVIDER')",
- *              "access_control_message"="You do not have permissions for this resource"
+ *              "access_control"="is_granted('create_for_provider', object)",
+ *              "access_control_message"="You do not have permissions for this resource or you are trying to insert wrong values"
  *          }
  *     }
  * )

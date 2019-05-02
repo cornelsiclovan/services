@@ -8,8 +8,12 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommmentRepository")
  * @ApiResource(
- *     itemOperations={},
- *     collectionOperations={}
+ *     itemOperations={
+ *      "get"
+ *     },
+ *     collectionOperations={
+ *      "get"
+ *     }
  * )
  */
 class Commment
