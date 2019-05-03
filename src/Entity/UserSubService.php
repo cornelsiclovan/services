@@ -33,6 +33,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          }
  *     }
  * )
+ * @UniqueEntity(
+ *     fields={"user", "service"},
+ *     message="Service is already registered for this user. Please register a different service or modify this one."
+ * )
  */
 class UserSubService
 {

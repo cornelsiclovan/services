@@ -44,7 +44,7 @@ class UserSubServiceUserEntitySubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::VIEW => ['getAuthenticatedUser', EventPriorities::PRE_WRITE]
+            KernelEvents::VIEW => ['getAuthenticatedUser', EventPriorities::PRE_VALIDATE]
         ];
     }
 
@@ -53,8 +53,6 @@ class UserSubServiceUserEntitySubscriber implements EventSubscriberInterface
 
         $entity = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();
-
-
 
         if(!in_array($method, [Request::METHOD_POST, Request::METHOD_PUT]) || (!$entity instanceof UserSubService && !$entity instanceof ClientSubService)){
             return;
