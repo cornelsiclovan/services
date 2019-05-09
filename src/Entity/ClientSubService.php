@@ -3,9 +3,13 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -19,17 +23,18 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          }
  *     },
  *     collectionOperations={
- *          "get"={
- *              "access_control"="is_granted('ROLE_SERVICE_PROVIDER')"
- *          },
+ *          "get"={"access_control"="is_granted('ROLE_SERVICE_PROVIDER')"},
  *          "post"={
  *              "access_control"="is_granted('create_for_client', object)",
  *              "access_control_message"="You do not have permissions for this resource, or you are trying to insert wrong values"
  *          }
+ *     },
+ *     denormalizationContext={
+ *          "groups"={"post"}
  *     }
  * )
  */
-class ClientSubService
+class ClientSubService implements AuthoredEntityInterface, PublishedDateEntityInterface
 {
     /**
      * @ORM\Id()
@@ -46,11 +51,13 @@ class ClientSubService
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Service", inversedBy="clientSubServices")
      * @Assert\NotBlank()
+     * @Groups({"post"})
      */
     private $service;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\SubService", inversedBy="clientSubServices")
+     * @Groups({"post"})
      */
     private $subServices;
 
@@ -59,19 +66,28 @@ class ClientSubService
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
+     * @Groups({"post"})
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
+     * @Groups({"post"})
      */
     private $country;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Commment", mappedBy="clientSubService")
+     * @Groups({"post"})
+     * @ApiSubresource()
      */
     private $commments;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $published;
 
     public function __construct()
     {
@@ -89,7 +105,7 @@ class ClientSubService
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    public function setUser(?UserInterface $user): AuthoredEntityInterface
     {
         $this->user = $user;
 
@@ -196,6 +212,20 @@ class ClientSubService
 
         return $this;
     }
+
+    public function getPublished()
+    {
+        return $this->published;
+    }
+
+    public function setPublished(\DateTimeInterface $published): PublishedDateEntityInterface
+    {
+        $this->published = $published;
+
+        return $this;
+    }
+
+
 
     public function __toString()
     {

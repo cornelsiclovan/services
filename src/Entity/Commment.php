@@ -2,21 +2,33 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommmentRepository")
  * @ApiResource(
  *     itemOperations={
- *      "get"
+ *      "get",
+ *      "put"={
+            "access_control"="is_granted('IS_AUTHENTICATED_FULLY') and object.getAuthor() == user"
+ *      }
  *     },
  *     collectionOperations={
- *      "get"
+ *      "get",
+ *      "post"={
+ *          "access_control"="is_granted('create_comment', object)",
+ *          "access_control_message"="You do not have access to this resource"
+ *      }
  *     }
  * )
  */
-class Commment
+class Commment implements AuthoredEntityInterface, PublishedDateEntityInterface
 {
     /**
      * @ORM\Id()
@@ -27,18 +39,28 @@ class Commment
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="commments")
+     * @Assert\NotNull()
      */
     private $author;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\ClientSubService", inversedBy="commments")
+     * @Assert\NotNull()
+     * @Groups({"post"})
      */
     private $clientSubService;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
+     * @Groups({"post"})
      */
     private $content;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $published;
 
     public function getId(): ?int
     {
@@ -50,7 +72,7 @@ class Commment
         return $this->author;
     }
 
-    public function setAuthor(?User $author): self
+    public function setUser(?UserInterface $author): AuthoredEntityInterface
     {
         $this->author = $author;
 
@@ -80,4 +102,25 @@ class Commment
 
         return $this;
     }
+
+
+    /**
+     * @return mixed
+     */
+    public function getPublished()
+    {
+        return $this->published;
+    }
+
+    /**
+     * @param mixed $published
+     */
+    public function setPublished(\DateTimeInterface $published): PublishedDateEntityInterface
+    {
+        $this->published = $published;
+
+        return $this;
+    }
+
+
 }

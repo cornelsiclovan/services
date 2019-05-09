@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,19 +19,33 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     itemOperations={
  *          "get"={
  *              "access_control"="is_granted('IS_AUTHENTICATED_FULLY') and object == user",
- *              "access_control_message"="You do not have permission for this resource"
+ *              "access_control_message"="You do not have permission for this resource",
+ *              "normalization_context"={
+ *                  "groups"={"get"}
+ *               }
+ *          },
+ *          "put"={
+ *              "access_control"="is_granted('IS_AUTHENTICATED_FULLY') and object == user",
+ *              "access_control_message"="You do not have permission for this resource",
+ *              "denormalization_context"={
+ *                  "groups"={"put"}
+ *              },
+ *              "normalization_context"={
+ *                  "groups"={"get"}
+ *               }
  *          }
  *      },
  *     collectionOperations={
- *          "get"={
-                "access_control"="is_granted('ROLE_ADMIN')",
- *              "access_control_message"="You do not have permissions for this resource"
- *          },
- *          "post"
+ *          "post"={
+ *            "denormalization_context"={
+ *                  "groups"={"post"}
+ *            },
+ *           "normalization_context"={
+ *                  "groups"={"get"}
+ *            }
+ *          }
  *     },
- *     normalizationContext={
- *          "groups"={"read"}
- *     }
+ *
  * )
  * @UniqueEntity("email")
  */
@@ -39,21 +55,21 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"read"})
+     * @Groups({"get"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank()
-     * @Groups({"read"})
+     * @Groups({"get", "post"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      * @Assert\NotBlank()
-     * @Groups({"read"})
+     * @Groups({"get", "post", "put"})
      */
     private $firstName;
 
@@ -61,7 +77,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank()
      * @Assert\Email()
-     * @Groups({"read"})
+     * @Groups({"get", "post"})
      * @Assert\Length(min=6, max=255)
      */
     private $email;
@@ -69,52 +85,52 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank()
-     * @Groups({"read"})
+     * @Groups({"get", "post", "put"})
      */
     private $telephone;
 
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank()
-     * @Groups({"read"})
+     * @Groups({"get", "post", "put"})
      */
     private $country;
 
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank()
-     * @Groups({"read"})
+     * @Groups({"get", "post", "put"})
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank()
-     * @Groups({"read"})
+     * @Groups({"get", "post", "put"})
      */
     private $street;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
-     * @Groups({"read"})
+     * @Groups({"get", "post", "put"})
      */
     private $number;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
-     * @Groups({"read"})
+     * @Groups({"get", "post", "put"})
      */
     private $building;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
-     * @Groups({"read"})
+     * @Groups({"get", "post", "put"})
      */
     private $staircase;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
-     * @Groups({"read"})
+     * @Groups({"get", "post", "put"})
      */
     private $apartment;
 
@@ -125,6 +141,7 @@ class User implements UserInterface
      *     pattern="/(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{7,}/",
      *     message="Passwords must be seven characters long and contain at least one digit, one uppercase letter and one lowecase letter"
      * )
+     * @Groups({"post", "put"})
      */
     private $password;
 
@@ -134,18 +151,20 @@ class User implements UserInterface
      *     "this.getPassword() === this.getPlainPassword()",
      *     message="Passwords do not match"
      * )
+     * @Groups({"post", "put"})
      */
     private $plainPassword;
 
     /**
      * @ORM\Column(type="json_array")
-     * @Groups({"read"})
+     * @Groups({"get", "put", "post"})
      */
     private $roles;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\UserSubService", mappedBy="user")
-     * @Groups({"read"})
+     * @Groups({"get"})
+     * @ApiSubresource()
      */
     private $userSubServices;
 
@@ -155,31 +174,32 @@ class User implements UserInterface
      *     "!this.getIsServiceProvider()==false || !this.getIsClient()==false",
      *     message="Please select one of the two options(client or service provider)"
      * )
-     * @Groups({"read"})
+     * @Groups({"get", "put", "post"})
      */
     private $isServiceProvider;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups({"read"})
+     * @Groups({"get", "put", "post"})
      */
     private $isClient;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ClientSubService", mappedBy="user")
-     * @Groups({"read"})
+     * @Groups({"get"})
+     * @ApiSubresource()
      */
     private $clientSubServices;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Commment", mappedBy="author")
-     * @Groups({"read"})
+     * @Groups({"get", "put", "post"})
      */
     private $commments;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups({"read"})
+     * @Groups({"get", "put", "post"})
      */
     private $enabled;
 
@@ -452,7 +472,7 @@ class User implements UserInterface
     {
         if ($this->userSubServices->contains($userSubService)) {
             $this->userSubServices->removeElement($userSubService);
-            // set the owning side to null (unless already changed)
+            // set the owning side to null (unless algety changed)
             if ($userSubService->getUser() === $this) {
                 $userSubService->setUser(null);
             }
@@ -507,7 +527,7 @@ class User implements UserInterface
     {
         if ($this->clientSubServices->contains($clientSubService)) {
             $this->clientSubServices->removeElement($clientSubService);
-            // set the owning side to null (unless already changed)
+            // set the owning side to null (unless algety changed)
             if ($clientSubService->getUser() === $this) {
                 $clientSubService->setUser(null);
             }
@@ -544,7 +564,7 @@ class User implements UserInterface
     {
         if ($this->commments->contains($commment)) {
             $this->commments->removeElement($commment);
-            // set the owning side to null (unless already changed)
+            // set the owning side to null (unless algety changed)
             if ($commment->getAuthor() === $this) {
                 $commment->setAuthor(null);
             }

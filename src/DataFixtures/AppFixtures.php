@@ -10,6 +10,7 @@ use App\Entity\UserSubService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
+use function in_array;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
@@ -19,6 +20,60 @@ class AppFixtures extends Fixture
 
     /** @var  Factory */
     private $faker;
+
+    private const USERS = [
+        [
+            'email' => 'cornel.siclovan@gmail.com',
+            'name'  => 'Siclovan',
+            'firstname' => 'Cornel',
+            'password'  => 'Secret123#',
+            'roles' => ['ROLE_ADMIN']
+        ],
+        [
+            'email' => 'johndoe@gmail.com',
+            'name'  => 'Doe',
+            'firstname' => 'John',
+            'password'  => 'Secret123#',
+            'roles' => ['ROLE_USER', 'ROLE_SERVICE_PROVIDER']
+        ],
+        [
+            'email' => 'hansolo@gmail.com',
+            'name'  => 'Solo',
+            'firstname' => 'Han',
+            'password'  => 'Secret123#',
+            'roles' => ['ROLE_USER', 'ROLE_CLIENT']
+        ],
+        [
+            'email' => 'jennyrowling@gmail.com',
+            'name'  => 'Rowling',
+            'firstname' => 'Jenny',
+            'password'  => 'Secret123#',
+            'roles' => ['ROLE_USER', 'ROLE_SERVICE_PROVIDER']
+        ],
+        [
+            'email' => 'robsmith@gmail.com',
+            'name'  => 'Smith',
+            'firstname' => 'Rob',
+            'password'  => 'Secret123#',
+            'roles' => ['ROLE_USER', 'ROLE_CLIENT']
+        ]
+    ];
+
+    private const SERVICES = [
+        [
+            'name' => 'Electric',
+            'description' => 'Electric install and services'
+        ],
+        [
+            'name' => 'Cleaning',
+            'description' => 'Cleaning services'
+        ],
+        [
+            'name' => 'Plumbing',
+            'description' => 'Fixing the pipes'
+        ]
+    ];
+
 
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -136,6 +191,37 @@ class AppFixtures extends Fixture
     public function loadUsers(ObjectManager $manager)
     {
 
+//        foreach (self::USERS as $userFixture) {
+//            $user = new User();
+//            $user->setName($userFixture['name']);
+//            $user->setFirstName($userFixture['firstname']);
+//            $user->setEmail($userFixture['email']);
+//            $user->setTelephone($this->faker->phoneNumber);
+//            $user->setCountry($this->faker->country);
+//            $user->setCity($this->faker->city);
+//            $user->setStreet($this->faker->streetName);
+//            $user->setNumber($this->faker->numberBetween(0, 10));
+//            $user->setBuilding($this->faker->numberBetween(0, 10));
+//            $user->setStaircase($this->faker->numberBetween(0, 10));
+//            $user->setApartment($this->faker->numberBetween(0, 10));
+//            $user->setRoles($userFixture['roles']);
+//            $user->setIsClient(in_array('ROLE_CLIENT', $userFixture['roles']));
+//            $user->setIsServiceProvider(in_array('ROLE_SERVICE_PROVIDER', $userFixture['roles']));
+//            $user->setEnabled(true);
+//
+//            $user->setPassword(
+//                $this->passwordEncoder->encodePassword(
+//                    $user,
+//                    $userFixture['password']
+//                )
+//            );
+//
+//            $this->addReference("user_" . $userFixture['email'], $user);
+//
+//
+//            $manager->persist($user);
+//        }
+
         //First user Admin
 
         $user = new User();
@@ -160,6 +246,7 @@ class AppFixtures extends Fixture
         );
 
         $this->addReference("user_admin", $user);
+
 
         $manager->persist($user);
 
@@ -293,6 +380,7 @@ class AppFixtures extends Fixture
         $clientSubService->setCity($user->getCity());
         $clientSubService->setCountry($user->getCountry());
         $clientSubService->setService($service);
+        $clientSubService->setPublished($this->faker->dateTime);
 
         /** @var SubService $subService */
         $subService = $this->getReference("outlets");
@@ -321,10 +409,12 @@ class AppFixtures extends Fixture
         $clientSubService->setCity($user->getCity());
         $clientSubService->setCountry($user->getCountry());
         $clientSubService->setService($service);
+        $clientSubService->setPublished($this->faker->dateTime);
 
         /** @var SubService $subService */
         $subService = $this->getReference("wash_floors");
         $clientSubService->addSubService($subService);
+
 
         /** @var SubService $subService */
         $subService = $this->getReference("wash_windows");
@@ -349,6 +439,7 @@ class AppFixtures extends Fixture
         $clientSubService->setCity($user->getCity());
         $clientSubService->setCountry($user->getCountry());
         $clientSubService->setService($service);
+        $clientSubService->setPublished($this->faker->dateTime);
 
         /** @var SubService $subService */
         $subService = $this->getReference("wash_floors");
@@ -361,6 +452,7 @@ class AppFixtures extends Fixture
         /** @var SubService $subService */
         $subService = $this->getReference("vacuuming");
         $clientSubService->addSubService($subService);
+        $clientSubService->setPublished($this->faker->dateTime);
 
         $manager->persist($clientSubService);
 

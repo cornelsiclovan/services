@@ -71,7 +71,6 @@ class ClientSubServiceVoter extends Voter
                 break;
         }
 
-
         //testing for each subservice in clientSubService to belong to it's correct service
         foreach($clientSubService->getSubServices() as $subService) {
             if($subService->getService() !== $clientSubService->getService()) {

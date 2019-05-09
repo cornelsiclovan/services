@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -38,7 +39,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     message="Service is already registered for this user. Please register a different service or modify this one."
  * )
  */
-class UserSubService
+class UserSubService implements AuthoredEntityInterface
 {
     /**
      * @ORM\Id()
@@ -57,6 +58,7 @@ class UserSubService
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Service", inversedBy="userSubServices")
      * @Assert\NotBlank()
+     * @Groups({"put"})
      */
     private $service;
 
@@ -83,7 +85,7 @@ class UserSubService
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    public function setUser(?UserInterface $user): AuthoredEntityInterface
     {
         $this->user = $user;
 
