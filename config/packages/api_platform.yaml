@@ -4,6 +4,7 @@ api_platform:
 
     eager_loading:
         enabled: true
+
     collection:
         pagination:
           items_per_page: 10

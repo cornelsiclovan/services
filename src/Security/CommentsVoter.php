@@ -8,6 +8,8 @@
 
 namespace App\Security;
 use App\Entity\Commment;
+use App\Entity\User;
+use App\Entity\UserSubService;
 use function in_array;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
@@ -41,13 +43,31 @@ class CommentsVoter extends Voter
 
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
+        /** @var User $user */
         $user = $token->getUser();
+        $userSubServices = array();
 
         /** @var Commment $comment */
         $comment = $subject;
 
         switch($attribute) {
             case self::CREATE :
+                if($this->decisionManager->decide($token, ['ROLE_SERVICE_PROVIDER'])){
+                    /** @var UserSubService $userSubServices */
+                    $userSubServices = $user->getUserSubServices();
+
+                    foreach ($userSubServices as $userSubService){
+
+                        /** @var UserSubService $a */
+                        $a = $userSubService;
+
+                        if($a->getService()->getId() === $comment->getClientSubService()->getService()->getId()) {
+                          return true;
+                        }
+
+                    }
+                    return false;
+                }
                 if($this->decisionManager->decide($token, ['ROLE_CLIENT'])) {
                     if($comment->getClientSubService()->getUser() !== $user) {
                         return false;
@@ -59,8 +79,6 @@ class CommentsVoter extends Voter
         }
 
 
-
-        dump("3");die();
         return false;
     }
 

@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiResource(
  *     itemOperations={
  *          "get"={
- *              "access_control"="is_granted('IS_AUTHENTICATED_FULLY') and object == user",
+ *              "access_control"="is_granted('IS_AUTHENTICATED_FULLY')",
  *              "access_control_message"="You do not have permission for this resource",
  *              "normalization_context"={
  *                  "groups"={"get"}
@@ -37,20 +37,21 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      },
  *     collectionOperations={
  *          "post"={
- *            "denormalization_context"={
+ *             "denormalization_context"={
  *                  "groups"={"post"}
- *            },
- *           "normalization_context"={
+ *              },
+ *              "normalization_context"={
  *                  "groups"={"get"}
- *            }
+ *              }
  *          }
- *     },
- *
+ *     }
  * )
  * @UniqueEntity("email")
  */
 class User implements UserInterface
 {
+    const ROLE_ADMIN = "ROLE_ADMIN";
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -62,14 +63,14 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank()
-     * @Groups({"get", "post"})
+     * @Groups({"get", "post", "get-comment-with-author"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      * @Assert\NotBlank()
-     * @Groups({"get", "post", "put"})
+     * @Groups({"get", "post", "put", "get-comment-with-author"})
      */
     private $firstName;
 
@@ -77,7 +78,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank()
      * @Assert\Email()
-     * @Groups({"get", "post"})
+     * @Groups({"post", "get-admin"})
      * @Assert\Length(min=6, max=255)
      */
     private $email;
@@ -157,7 +158,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="json_array")
-     * @Groups({"get", "put", "post"})
+     * @Groups({"get-admin", "put", "post"})
      */
     private $roles;
 
@@ -194,6 +195,7 @@ class User implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Commment", mappedBy="author")
      * @Groups({"get", "put", "post"})
+
      */
     private $commments;
 
