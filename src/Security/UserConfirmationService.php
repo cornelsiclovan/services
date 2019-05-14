@@ -1,0 +1,46 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: user
+ * Date: 14.05.2019
+ * Time: 11:02
+ */
+
+namespace App\Security;
+
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+class UserConfirmationService
+{
+
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
+    public function __construct(UserRepository $userRepository, EntityManagerInterface $entityManager)
+    {
+        $this->userRepository = $userRepository;
+        $this->entityManager = $entityManager;
+    }
+
+    public function confirmUser(string $confirmationToken)
+    {
+        $user = $this->userRepository->findOneBy(['confirmationToken' => $confirmationToken]);
+
+        // User was found by confirmation token
+        if(!$user) {
+            throw new NotFoundHttpException();
+        }
+
+        $user->setEnabled(true);
+        $user->setConfirmationToken(null);
+        $this->entityManager->flush();
+    }
+}

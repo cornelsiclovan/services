@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -10,8 +9,10 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Controller\ResetPasswordAction;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -33,6 +34,16 @@ use Symfony\Component\Validator\Constraints as Assert;
  *              "normalization_context"={
  *                  "groups"={"get"}
  *               }
+ *          },
+ *           "put-reset-password"={
+ *              "access_control"="is_granted('IS_AUTHENTICATED_FULLY') and object == user",
+ *              "access_control_message"="You do not have permission for this resource",
+ *              "method"="PUT",
+ *              "path"="/users/{id}/reset-password",
+ *              "controller"=ResetPasswordAction::class,
+ *              "denormalization_context"={
+ *                  "groups"={"put-reset-password"}
+ *              }
  *          }
  *      },
  *     collectionOperations={
@@ -42,11 +53,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  *              },
  *              "normalization_context"={
  *                  "groups"={"get"}
- *              }
+ *              },
+ *               "validation_groups"={"post"}
  *          }
  *     }
  * )
- * @UniqueEntity("email")
+ * @UniqueEntity("email", groups={"post", "put"})
  */
 class User implements UserInterface
 {
@@ -62,26 +74,33 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"post", "put"})
      * @Groups({"get", "post", "get-comment-with-author"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"post", "put"})
      * @Groups({"get", "post", "put", "get-comment-with-author"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank()
-     * @Assert\Email()
-     * @Groups({"post", "get-admin"})
+     * @Assert\NotBlank(groups={"post"})
+     * @Assert\Email(groups={"post"})
+     * @Groups({"post", "get-admin", "get-owner"})
      * @Assert\Length(min=6, max=255)
      */
     private $email;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Image")
+     * @Groups({"post"})
+     * @ApiSubresource()
+     */
+    private $image;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -136,31 +155,68 @@ class User implements UserInterface
     private $apartment;
 
     /**
-     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(groups={"post"})
      * @Assert\Regex(
      *     pattern="/(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{7,}/",
-     *     message="Passwords must be seven characters long and contain at least one digit, one uppercase letter and one lowecase letter"
+     *     message="Passwords must be seven characters long and contain at least one digit, one uppercase letter and one lowecase letter",
+     *     groups={"post"}
      * )
-     * @Groups({"post", "put"})
+     * @Groups({"post"})
      */
     private $password;
 
     /**
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"post"})
      * @Assert\Expression(
      *     "this.getPassword() === this.getPlainPassword()",
-     *     message="Passwords do not match"
+     *     message="Passwords do not match",
+     *     groups={"post"}
      * )
-     * @Groups({"post", "put"})
+     * @Groups({"post"})
      */
     private $plainPassword;
 
     /**
+     * @Groups({"put-reset-password"})
+     * @Assert\NotBlank(groups={"put-reset-password"})
+     * @Assert\Regex(
+     *     pattern="/(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{7,}/",
+     *     message="Passwords must be seven characters long and contain at least one digit, one uppercase letter and one lowecase letter",
+     *     groups={"put-reset-password"}
+     * )
+     */
+    private $newPassword;
+
+    /**
+     * @Groups({"put-reset-password"})
+     * @Assert\NotBlank(groups={"put-reset-password"})
+     * @Assert\Expression(
+     *     "this.getNewPassword() === this.getNewRetypedPassword()",
+     *     message="Passwords do not match",
+     *     groups={"put-reset-password"}
+     * )
+     */
+    private $newRetypedPassword;
+
+    /**
+     * @Groups({"put-reset-password"})
+     * @Assert\NotBlank(groups={"put-reset-password"})
+     * @UserPassword(groups={"put-reset-password"})
+     */
+    private $oldPassword;
+
+    /**
      * @ORM\Column(type="json_array")
-     * @Groups({"get-admin", "put", "post"})
+     * @Groups({"get-admin", "get-owner", "put", "post"})
+     * @Assert\NotNull(groups={"post"})
      */
     private $roles;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $passwordChangeDate;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\UserSubService", mappedBy="user")
@@ -176,6 +232,7 @@ class User implements UserInterface
      *     message="Please select one of the two options(client or service provider)"
      * )
      * @Groups({"get", "put", "post"})
+     * @Assert\NotNull()
      */
     private $isServiceProvider;
 
@@ -593,5 +650,55 @@ class User implements UserInterface
     public function setConfirmationToken($confirmationToken)
     {
         $this->confirmationToken = $confirmationToken;
+    }
+
+    public function getNewPassword(): ?string
+    {
+        return $this->newPassword;
+    }
+
+    public function setNewPassword($newPassword)
+    {
+        $this->newPassword = $newPassword;
+    }
+
+    public function getNewRetypedPassword(): ?string
+    {
+        return $this->newRetypedPassword;
+    }
+
+    public function setNewRetypedPassword($newRetypedPassword)
+    {
+        $this->newRetypedPassword = $newRetypedPassword;
+    }
+
+    public function getOldPassword(): ?string
+    {
+        return $this->oldPassword;
+    }
+
+    public function setOldPassword($oldPassword)
+    {
+        $this->oldPassword = $oldPassword;
+    }
+
+    public function getPasswordChangeDate()
+    {
+        return $this->passwordChangeDate;
+    }
+
+    public function setPasswordChangeDate($passwordChangeDate)
+    {
+        $this->passwordChangeDate = $passwordChangeDate;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
     }
 }
