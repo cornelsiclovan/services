@@ -2,21 +2,73 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiSubresource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\RangeFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ClientSubServiceRepository")
+ * @ApiFilter(
+ *     SearchFilter::class,
+ *     properties={
+ *          "country": "partial",
+ *          "city": "partial",
+ *          "user": "exact",
+ *          "user.name": "partial",
+ *          "service": "exact",
+ *          "service.name": "partial"
+ *     }
+ * )
+ * @ApiFilter(
+ *     DateFilter::class,
+ *     properties={
+ *          "published"
+ *     }
+ * )
+ * @ApiFilter(
+ *     RangeFilter::class,
+ *     properties={
+ *          "id"
+ *     }
+ * )
+ * @ApiFilter(
+ *     OrderFilter::class,
+ *     properties={
+ *          "id",
+ *          "published",
+ *          "service"
+ *     },
+ *     arguments={
+ *          "orderParameterName"="_order"
+ *     }
+ * )
+ *@ApiFilter(
+ *     PropertyFilter::class,
+ *     arguments={
+ *          "parameterName": "properties",
+ *          "overrideDefaultProperties": false,
+ *          "whitelist": {"id", "service", "subServices"}
+ *     }
+ * )
  * @ApiResource(
+ *     attributes={
+ *          "order"={"published": "DESC"},
+ *          "pagination_client_enabled"=true
+ *     },
  *     itemOperations={
  *          "get"={
-                "normalization_context"={
+ *                  "normalization_context"={
  *                  "groups"={"get-client-sub-service-with-author"}
  *              }
  *          },

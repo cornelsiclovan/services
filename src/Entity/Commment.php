@@ -13,6 +13,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommmentRepository")
  * @ApiResource(
+ *     attributes={
+ *       "order"={"published": "DESC"},
+ *       "pagination_client_enabled"=true,
+ *       "pagination_client_items_per_page"=true
+ *     },
  *     itemOperations={
  *       "get",
  *       "put"={
@@ -138,5 +143,9 @@ class Commment implements AuthoredEntityInterface, PublishedDateEntityInterface
         return $this;
     }
 
+    public function __toString()
+    {
+       return $this->getContent();
+    }
 
 }

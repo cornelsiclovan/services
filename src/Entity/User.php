@@ -43,7 +43,8 @@ use App\Controller\ResetPasswordAction;
  *              "controller"=ResetPasswordAction::class,
  *              "denormalization_context"={
  *                  "groups"={"put-reset-password"}
- *              }
+ *              },
+ *              "validation_groups"={"put-reset-password"}
  *          }
  *      },
  *     collectionOperations={
@@ -75,7 +76,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank(groups={"post", "put"})
-     * @Groups({"get", "post", "get-comment-with-author"})
+     * @Groups({"get", "put", "post", "get-comment-with-author"})
      */
     private $name;
 
@@ -97,7 +98,7 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Image")
-     * @Groups({"post"})
+     * @Groups({"get", "post", "put"})
      * @ApiSubresource()
      */
     private $image;

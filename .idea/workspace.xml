@@ -5,28 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bb16825b-60ed-4863-9343-62181a683f8d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Controller/DefaultController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Controller/ResetPasswordAction.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Controller/UploadImageAction.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Email/Mailer.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Entity/Image.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Entity/UserConfirmation.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/EventSubscriber/UserConfirmationSubscriber.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Form/ImageType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Security/TokenAuthenticator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Security/UserConfirmationService.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Serializer/UserAttributeNormalizer.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/email/confirmation.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.env.dist" afterPath="$PROJECT_DIR$/.env.dist" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/packages/monolog.yaml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/EventSubscriber/EmptyBodySubscriber.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Exception/EmptyBodyException.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Exception/InvalidConfirmationTokenException.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Exception/InvalidUserException.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Exception/UserAlreadyHasServiceRegisteredException.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/bundles.php" afterPath="$PROJECT_DIR$/config/bundles.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/packages/security.yaml" afterPath="$PROJECT_DIR$/config/packages/security.yaml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/packages/api_platform.yaml" afterPath="$PROJECT_DIR$/config/packages/api_platform.yaml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/packages/dev/monolog.yaml" afterPath="$PROJECT_DIR$/config/packages/dev/monolog.yaml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/services.yaml" afterPath="$PROJECT_DIR$/config/services.yaml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/ClientSubService.php" afterPath="$PROJECT_DIR$/src/Entity/ClientSubService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/Commment.php" afterPath="$PROJECT_DIR$/src/Entity/Commment.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/Image.php" afterPath="$PROJECT_DIR$/src/Entity/Image.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/User.php" afterPath="$PROJECT_DIR$/src/Entity/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EventSubscriber/UserRegisterSubscriber.php" afterPath="$PROJECT_DIR$/src/EventSubscriber/UserRegisterSubscriber.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/symfony.lock" afterPath="$PROJECT_DIR$/symfony.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Security/UserConfirmationService.php" afterPath="$PROJECT_DIR$/src/Security/UserConfirmationService.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -37,67 +32,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Image.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entity/Image.php">
+      <file leaf-file-name="Commment.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Commment.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="30" column="11" lean-forward="false" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
-              <folding>
-                <element signature="e#110#154#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="vich_uploader.yaml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/packages/vich_uploader.yaml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="57" lean-forward="false" selection-start-line="6" selection-start-column="57" selection-end-line="6" selection-end-column="57" />
+            <state relative-caret-position="714">
+              <caret line="147" column="34" lean-forward="false" selection-start-line="147" selection-start-column="34" selection-end-line="147" selection-end-column="34" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="5cda9bc140c26316420948.jpg" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/images/5cda9bc140c26316420948.jpg">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UploadImageAction.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/UploadImageAction.php">
+      <file leaf-file-name="SubService.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Entity/SubService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="20" column="32" lean-forward="false" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
-              <folding>
-                <element signature="e#114#175#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="-255">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ImageType.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Form/ImageType.php">
+      <file leaf-file-name="UserSubService.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Entity/UserSubService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="31" column="5" lean-forward="false" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
-              <folding>
-                <element signature="e#108#129#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="User.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
-              <caret line="702" column="5" lean-forward="false" selection-start-line="702" selection-start-column="5" selection-end-line="702" selection-end-column="5" />
-              <folding>
-                <element signature="e#30#74#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="-51">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -106,13 +66,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>setAut</find>
-      <find>setPu</find>
-      <find>comm</find>
-      <find>services</find>
-      <find>setPi</find>
-      <find>Resource</find>
-      <find>subRes</find>
       <find>excee</find>
       <find>apiSu</find>
       <find>sub</find>
@@ -136,6 +89,13 @@
       <find>email</find>
       <find>emai</find>
       <find>comment</find>
+      <find>get-comment-with-author</find>
+      <find>client</find>
+      <find>user</find>
+      <find>author</find>
+      <find>service</find>
+      <find>subser</find>
+      <find>get-</find>
     </findStrings>
     <replaceStrings>
       <replace>get</replace>
@@ -147,12 +107,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/config/routes/jwt.yaml" />
-        <option value="$PROJECT_DIR$/src/Security/UserEnabledChecker.php" />
-        <option value="$PROJECT_DIR$/src/Security/TokenGenerator.php" />
-        <option value="$PROJECT_DIR$/src/EventSubscriber/PasswordHashSubscriber.php" />
-        <option value="$PROJECT_DIR$/src/EventSubscriber/UsersSubServiceEntitySubscriber.php" />
-        <option value="$PROJECT_DIR$/src/EventSubscriber/UserSubServiceEntitySubscriber.php" />
         <option value="$PROJECT_DIR$/src/Form/ProviderSelectServiceType.php" />
         <option value="$PROJECT_DIR$/src/EventListener/ExceptionListener.php" />
         <option value="$PROJECT_DIR$/src/Exception/EmptyUserException.php" />
@@ -176,18 +130,13 @@
         <option value="$PROJECT_DIR$/src/EventSubscriber/UserSubServiceUserEntitySubscriber.php" />
         <option value="$PROJECT_DIR$/src/Entity/UserSubService.php" />
         <option value="$PROJECT_DIR$/vendor/symfony/serializer/Normalizer/AbstractObjectNormalizer.php" />
-        <option value="$PROJECT_DIR$/config/packages/api_platform.yaml" />
-        <option value="$PROJECT_DIR$/src/Entity/Commment.php" />
-        <option value="$PROJECT_DIR$/src/Entity/ClientSubService.php" />
         <option value="$PROJECT_DIR$/src/Serializer/UserContextBuilder.php" />
         <option value="$PROJECT_DIR$/src/Serializer/UserAttributeNormalizer.php" />
-        <option value="$PROJECT_DIR$/config/services.yaml" />
         <option value="$PROJECT_DIR$/src/Controller/ResetPasswordAction.php" />
         <option value="$PROJECT_DIR$/config/packages/security.yaml" />
         <option value="$PROJECT_DIR$/src/Security/TokenAuthenticator.php" />
         <option value="$PROJECT_DIR$/src/Entity/UserConfirmation.php" />
         <option value="$PROJECT_DIR$/.env" />
-        <option value="$PROJECT_DIR$/src/Security/UserConfirmationService.php" />
         <option value="$PROJECT_DIR$/src/EventSubscriber/UserConfirmationSubscriber.php" />
         <option value="$PROJECT_DIR$/src/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/templates/email/confirmation.html.twig" />
@@ -195,9 +144,20 @@
         <option value="$PROJECT_DIR$/src/Email/Mailer.php" />
         <option value="$PROJECT_DIR$/src/Form/ImageType.php" />
         <option value="$PROJECT_DIR$/src/Controller/UploadImageAction.php" />
-        <option value="$PROJECT_DIR$/src/Entity/Image.php" />
         <option value="$PROJECT_DIR$/config/packages/vich_uploader.yaml" />
+        <option value="$PROJECT_DIR$/src/Entity/Image.php" />
+        <option value="$PROJECT_DIR$/src/Entity/ClientSubService.php" />
+        <option value="$PROJECT_DIR$/src/EventSubscriber/EmptyBodySubscriber.php" />
+        <option value="$PROJECT_DIR$/src/Exception/EmptyBodyException.php" />
         <option value="$PROJECT_DIR$/src/Entity/User.php" />
+        <option value="$PROJECT_DIR$/src/Exception/InvalidUserException.php" />
+        <option value="$PROJECT_DIR$/src/Exception/InvalidConfirmationTokenException.php" />
+        <option value="$PROJECT_DIR$/config/packages/api_platform.yaml" />
+        <option value="$PROJECT_DIR$/config/packages/monolog.yaml" />
+        <option value="$PROJECT_DIR$/config/services.yaml" />
+        <option value="$PROJECT_DIR$/src/Security/UserConfirmationService.php" />
+        <option value="$PROJECT_DIR$/config/packages/dev/monolog.yaml" />
+        <option value="$PROJECT_DIR$/src/Entity/Commment.php" />
       </list>
     </option>
   </component>
@@ -209,8 +169,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="478" />
-    <option name="width" value="1444" />
+    <option name="x" value="690" />
+    <option name="width" value="1232" />
     <option name="height" value="1040" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -239,6 +199,11 @@
             <path>
               <item name="services2" type="b2602c69:ProjectViewProjectNode" />
               <item name="services2" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="services2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="services2" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -246,6 +211,17 @@
               <item name="services2" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Entity" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="services2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="services2" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="var" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="services2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="services2" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="var" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="log" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -260,7 +236,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../udemy_project_api" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
-    <property name="SearchEverywhereHistoryKey" value="normalize&#9;null&#9;null&#10;Norma&#9;FILE&#9;file://C:/Sites/services2/vendor/symfony/serializer/Normalizer/NormalizerInterface.php&#10;Comment&#9;FILE&#9;file://C:/Sites/services2/vendor/nikic/php-parser/lib/PhpParser/Comment.php&#10;comment&#9;null&#9;null&#10;getSubresourceOpe&#9;null&#9;null&#10;subResource&#9;FILE&#9;file://C:/Sites/services2/vendor/api-platform/core/src/Operation/Factory/SubresourceOperationFactory.php&#10;ApiSubRe&#9;null&#9;null&#10;eager&#9;FILE&#9;file://C:/Sites/services2/vendor/api-platform/core/src/Bridge/Doctrine/Orm/Extension/EagerLoadingExtension.php&#10;Firewall/Ex&#9;FILE&#9;file://C:/Sites/services2/vendor/symfony/security-http/Firewall/ExceptionListener.php" />
+    <property name="SearchEverywhereHistoryKey" value="UserAlrea&#9;FILE&#9;file://C:/Sites/services2/src/Exception/UserAlreadyHasServiceRegisteredException.php&#10;normalize&#9;null&#9;null&#10;Norma&#9;FILE&#9;file://C:/Sites/services2/vendor/symfony/serializer/Normalizer/NormalizerInterface.php&#10;Comment&#9;FILE&#9;file://C:/Sites/services2/vendor/nikic/php-parser/lib/PhpParser/Comment.php&#10;comment&#9;null&#9;null&#10;getSubresourceOpe&#9;null&#9;null&#10;subResource&#9;FILE&#9;file://C:/Sites/services2/vendor/api-platform/core/src/Operation/Factory/SubresourceOperationFactory.php&#10;ApiSubRe&#9;null&#9;null&#10;eager&#9;FILE&#9;file://C:/Sites/services2/vendor/api-platform/core/src/Bridge/Doctrine/Orm/Extension/EagerLoadingExtension.php&#10;Firewall/Ex&#9;FILE&#9;file://C:/Sites/services2/vendor/symfony/security-http/Firewall/ExceptionListener.php" />
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
   </component>
   <component name="RecentsManager">
@@ -324,22 +300,22 @@
       <workItem from="1556192451632" duration="1189000" />
       <workItem from="1556780985347" duration="14778000" />
       <workItem from="1557128307002" duration="18375000" />
-      <workItem from="1557385847590" duration="60492000" />
+      <workItem from="1557385847590" duration="71839000" />
+      <workItem from="1557923541496" duration="2820000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="303433000" />
+    <option name="totallyTimeSpent" value="317600000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="478" y="0" width="1444" height="1040" extended-state="0" />
+    <frame x="690" y="0" width="1232" height="1040" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19942197" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28327644" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32692307" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -351,6 +327,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32692307" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -372,154 +349,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/api-platform/core/src/Operation/Factory/SubresourceOperationFactory.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1975">
-          <caret line="28" column="143" lean-forward="false" selection-start-line="28" selection-start-column="142" selection-end-line="28" selection-end-column="143" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="24" lean-forward="true" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/CommentController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/nikic/php-parser/lib/PhpParser/Comment.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1615">
-          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/api-platform/core/src/Metadata/Resource/ResourceMetadata.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="209" column="5" lean-forward="false" selection-start-line="209" selection-start-column="5" selection-end-line="209" selection-end-column="5" />
-          <folding>
-            <element signature="e#312#351#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/AuthoredEntityInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="11" column="9" lean-forward="false" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/EventSubscriber/UserSubServiceUserEntitySubscriber.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="38" column="80" lean-forward="true" selection-start-line="38" selection-start-column="80" selection-end-line="38" selection-end-column="88" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/EventSubscriber/PublishedDateEntitySubscriber.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="27" column="10" lean-forward="false" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Service/HashPasswordListener.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/UserSubService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="33" column="13" lean-forward="false" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/serializer/Normalizer/NormalizerInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="38" column="25" lean-forward="false" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/serializer/Normalizer/AbstractObjectNormalizer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="84" column="5" lean-forward="false" selection-start-line="84" selection-start-column="5" selection-end-line="84" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes/api_platform.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/packages/api_platform.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="47" lean-forward="false" selection-start-line="12" selection-start-column="47" selection-end-line="12" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/ClientSubService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="501">
-          <caret line="228" column="37" lean-forward="false" selection-start-line="228" selection-start-column="28" selection-end-line="228" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Commment.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1292">
-          <caret line="76" column="40" lean-forward="false" selection-start-line="76" selection-start-column="40" selection-end-line="76" selection-end-column="40" />
-          <folding>
-            <element signature="e#30#74#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/serializer/SerializerAwareTrait.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="5" lean-forward="false" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/services.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="9" lean-forward="false" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Serializer/UserContextBuilder.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-136">
@@ -544,18 +373,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1555323056794" expanded="true" signature="569:686" ph="ALTER TABLE client_sub_service... " />
-            <marker date="1555323056794" expanded="true" signature="713:782" ph="ALTER TABLE sub_service... " />
-            <marker date="1555323056794" expanded="true" signature="809:924" ph="ALTER TABLE user_sub_service... " />
-            <marker date="1555323056794" expanded="true" signature="951:1084" ph="ALTER TABLE commment... " />
-            <marker date="1555323056794" expanded="true" signature="1111:1467" ph="ALTER TABLE user... " />
-            <marker date="1555323056794" expanded="true" signature="1783:1900" ph="ALTER TABLE client_sub_service... " />
-            <marker date="1555323056794" expanded="true" signature="1927:2060" ph="ALTER TABLE commment... " />
-            <marker date="1555323056794" expanded="true" signature="2087:2156" ph="ALTER TABLE sub_service... " />
-            <marker date="1555323056794" expanded="true" signature="2183:2651" ph="ALTER TABLE user... " />
-            <marker date="1555323056794" expanded="true" signature="2678:2793" ph="ALTER TABLE user_sub_service... " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -563,20 +380,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1550149355509" expanded="true" signature="569:900" ph="CREATE TABLE... commment" />
-            <marker date="1550149355509" expanded="true" signature="927:1027" ph="ALTER TABLE commment... " />
-            <marker date="1550149355509" expanded="true" signature="1054:1180" ph="ALTER TABLE commment... " />
-            <marker date="1550149355509" expanded="true" signature="1207:1324" ph="ALTER TABLE client_sub_service... " />
-            <marker date="1550149355509" expanded="true" signature="1351:1420" ph="ALTER TABLE sub_service... " />
-            <marker date="1550149355509" expanded="true" signature="1447:1562" ph="ALTER TABLE user_sub_service... " />
-            <marker date="1550149355509" expanded="true" signature="1589:1863" ph="ALTER TABLE user... " />
-            <marker date="1550149355509" expanded="true" signature="2179:2198" ph="DROP TABLE c... " />
-            <marker date="1550149355509" expanded="true" signature="2225:2342" ph="ALTER TABLE client_sub_service... " />
-            <marker date="1550149355509" expanded="true" signature="2369:2438" ph="ALTER TABLE sub_service... " />
-            <marker date="1550149355509" expanded="true" signature="2465:2894" ph="ALTER TABLE user... " />
-            <marker date="1550149355509" expanded="true" signature="2921:3036" ph="ALTER TABLE user_sub_service... " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -584,18 +387,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
           <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding>
-            <marker date="1557748727596" expanded="true" signature="569:686" ph="ALTER TABLE client_sub_service... " />
-            <marker date="1557748727596" expanded="true" signature="713:846" ph="ALTER TABLE commment... " />
-            <marker date="1557748727596" expanded="true" signature="873:942" ph="ALTER TABLE sub_service... " />
-            <marker date="1557748727596" expanded="true" signature="969:1381" ph="ALTER TABLE user... " />
-            <marker date="1557748727596" expanded="true" signature="1408:1523" ph="ALTER TABLE user_sub_service... " />
-            <marker date="1557748727596" expanded="true" signature="1839:1956" ph="ALTER TABLE client_sub_service... " />
-            <marker date="1557748727596" expanded="true" signature="1983:2116" ph="ALTER TABLE commment... " />
-            <marker date="1557748727596" expanded="true" signature="2143:2212" ph="ALTER TABLE sub_service... " />
-            <marker date="1557748727596" expanded="true" signature="2239:2837" ph="ALTER TABLE user... " />
-            <marker date="1557748727596" expanded="true" signature="2864:2979" ph="ALTER TABLE user_sub_service... " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -603,18 +394,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1557318582643" expanded="true" signature="569:719" ph="ALTER TABLE client_sub_service... " />
-            <marker date="1557318582643" expanded="true" signature="746:815" ph="ALTER TABLE sub_service... " />
-            <marker date="1557318582643" expanded="true" signature="842:957" ph="ALTER TABLE user_sub_service... " />
-            <marker date="1557318582643" expanded="true" signature="984:1150" ph="ALTER TABLE commment... " />
-            <marker date="1557318582643" expanded="true" signature="1177:1522" ph="ALTER TABLE user... " />
-            <marker date="1557318582643" expanded="true" signature="1838:1971" ph="ALTER TABLE client_sub_service... " />
-            <marker date="1557318582643" expanded="true" signature="1998:2147" ph="ALTER TABLE commment... " />
-            <marker date="1557318582643" expanded="true" signature="2174:2243" ph="ALTER TABLE sub_service... " />
-            <marker date="1557318582643" expanded="true" signature="2270:2801" ph="ALTER TABLE user... " />
-            <marker date="1557318582643" expanded="true" signature="2828:2943" ph="ALTER TABLE user_sub_service... " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -622,18 +401,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1557748602908" expanded="true" signature="569:686" ph="ALTER TABLE client_sub_service... " />
-            <marker date="1557748602908" expanded="true" signature="713:846" ph="ALTER TABLE commment... " />
-            <marker date="1557748602908" expanded="true" signature="873:942" ph="ALTER TABLE sub_service... " />
-            <marker date="1557748602908" expanded="true" signature="969:1381" ph="ALTER TABLE user... " />
-            <marker date="1557748602908" expanded="true" signature="1408:1523" ph="ALTER TABLE user_sub_service... " />
-            <marker date="1557748602908" expanded="true" signature="1839:1956" ph="ALTER TABLE client_sub_service... " />
-            <marker date="1557748602908" expanded="true" signature="1983:2116" ph="ALTER TABLE commment... " />
-            <marker date="1557748602908" expanded="true" signature="2143:2212" ph="ALTER TABLE sub_service... " />
-            <marker date="1557748602908" expanded="true" signature="2239:2837" ph="ALTER TABLE user... " />
-            <marker date="1557748602908" expanded="true" signature="2864:2979" ph="ALTER TABLE user_sub_service... " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -641,18 +408,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1557748420579" expanded="true" signature="569:686" ph="ALTER TABLE client_sub_service... " />
-            <marker date="1557748420579" expanded="true" signature="713:846" ph="ALTER TABLE commment... " />
-            <marker date="1557748420579" expanded="true" signature="873:942" ph="ALTER TABLE sub_service... " />
-            <marker date="1557748420579" expanded="true" signature="969:1357" ph="ALTER TABLE user... " />
-            <marker date="1557748420579" expanded="true" signature="1384:1499" ph="ALTER TABLE user_sub_service... " />
-            <marker date="1557748420579" expanded="true" signature="1815:1932" ph="ALTER TABLE client_sub_service... " />
-            <marker date="1557748420579" expanded="true" signature="1959:2092" ph="ALTER TABLE commment... " />
-            <marker date="1557748420579" expanded="true" signature="2119:2188" ph="ALTER TABLE sub_service... " />
-            <marker date="1557748420579" expanded="true" signature="2215:2773" ph="ALTER TABLE user... " />
-            <marker date="1557748420579" expanded="true" signature="2800:2915" ph="ALTER TABLE user_sub_service... " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -670,9 +425,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
           <caret line="63" column="10" lean-forward="false" selection-start-line="63" selection-start-column="10" selection-end-line="63" selection-end-column="10" />
-          <folding>
-            <element signature="e#114#164#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -718,31 +470,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Security/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Security/UserConfirmationService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="26" column="88" lean-forward="false" selection-start-line="26" selection-start-column="88" selection-end-line="26" selection-end-column="88" />
-          <folding>
-            <element signature="e#113#147#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Security/User.php" />
     <entry file="file://$PROJECT_DIR$/templates/email/confirmation.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="18" lean-forward="false" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
-          <folding>
-            <element signature="e#155#176#0#Twig" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -750,7 +482,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
           <caret line="32" column="38" lean-forward="false" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -758,9 +489,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="12" column="14" lean-forward="false" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
-          <folding>
-            <element signature="e#28#48#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -768,10 +496,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="16" column="66" lean-forward="false" selection-start-line="16" selection-start-column="66" selection-end-line="16" selection-end-column="66" />
-          <folding>
-            <element signature="e#114#155#0#PHP" expanded="true" />
-            <element signature="e#618#632#1#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -779,7 +503,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -787,7 +510,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-51">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -796,16 +518,8 @@
         <state relative-caret-position="442">
           <caret line="45" column="43" lean-forward="false" selection-start-line="45" selection-start-column="43" selection-end-line="45" selection-end-column="43" />
           <folding>
-            <element signature="e#38#89#0#PHP" expanded="true" />
+            <element signature="e#38#89#0#PHP" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/EventSubscriber/UserConfirmationSubscriber.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -813,19 +527,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="31" column="5" lean-forward="false" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
-          <folding>
-            <element signature="e#108#129#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Image.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="30" column="11" lean-forward="false" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
-          <folding>
-            <element signature="e#110#154#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -833,9 +534,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="20" column="32" lean-forward="false" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
-          <folding>
-            <element signature="e#114#175#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -862,13 +560,186 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Image.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="28" column="8" lean-forward="false" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
+          <folding>
+            <element signature="e#110#154#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EventSubscriber/EmptyBodySubscriber.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="37" column="42" lean-forward="false" selection-start-line="37" selection-start-column="42" selection-end-line="37" selection-end-column="42" />
+          <folding>
+            <element signature="e#119#170#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EventSubscriber/UserSubServiceUserEntitySubscriber.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="38" column="80" lean-forward="false" selection-start-line="38" selection-start-column="80" selection-end-line="38" selection-end-column="88" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Exception/UserAlreadyHasServiceRegisteredException.php" />
+    <entry file="file://$PROJECT_DIR$/src/Exception/EmptyBodyException.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="16" column="77" lean-forward="false" selection-start-line="16" selection-start-column="77" selection-end-line="16" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/ClientSubService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="65" column="42" lean-forward="false" selection-start-line="65" selection-start-column="42" selection-end-line="65" selection-end-column="42" />
+          <folding>
+            <element signature="e#30#72#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="702" column="5" lean-forward="false" selection-start-line="702" selection-start-column="5" selection-end-line="702" selection-end-column="5" />
+        <state relative-caret-position="510">
+          <caret line="93" column="23" lean-forward="false" selection-start-line="93" selection-start-column="23" selection-end-line="93" selection-end-column="23" />
           <folding>
-            <element signature="e#30#74#0#PHP" expanded="true" />
+            <element signature="e#30#74#0#PHP" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Exception/InvalidUserException.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="15" column="45" lean-forward="false" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Exception/InvalidConfirmationTokenException.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="15" column="59" lean-forward="false" selection-start-line="15" selection-start-column="59" selection-end-line="15" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EventSubscriber/UserConfirmationSubscriber.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/api_platform.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="60" lean-forward="false" selection-start-line="18" selection-start-column="60" selection-end-line="18" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/var/log/dev.log">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="LogFileEditorProvider">
+        <state relative-caret-position="713">
+          <caret line="41432" column="0" lean-forward="false" selection-start-line="41429" selection-start-column="33" selection-end-line="42039" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/var/log/token_confirmation_dev.log">
+      <provider selected="true" editor-type-id="LogFileEditorProvider">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/prod/doctrine.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/prod/monolog.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/dev/monolog.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="53" lean-forward="false" selection-start-line="11" selection-start-column="53" selection-end-line="11" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Security/UserConfirmationService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="49" column="73" lean-forward="false" selection-start-line="49" selection-start-column="73" selection-end-line="49" selection-end-column="73" />
+          <folding>
+            <element signature="e#113#165#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/monolog.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="32" lean-forward="false" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/services.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="43" column="21" lean-forward="false" selection-start-line="43" selection-start-column="21" selection-end-line="43" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/UserSubService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-51">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Commment.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="147" column="34" lean-forward="false" selection-start-line="147" selection-start-column="34" selection-end-line="147" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/SubService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-255">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
