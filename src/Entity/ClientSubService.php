@@ -147,6 +147,13 @@ class ClientSubService implements AuthoredEntityInterface, PublishedDateEntityIn
      */
     private $published;
 
+    /**
+     * @ORM\Column(type="text")
+     * @Assert\NotBlank()
+     * @Groups({"post", "get-client-sub-service-with-author"})
+     */
+    private $description;
+
     public function __construct()
     {
         $this->subServices = new ArrayCollection();
@@ -283,6 +290,15 @@ class ClientSubService implements AuthoredEntityInterface, PublishedDateEntityIn
         return $this;
     }
 
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
 
 
     public function __toString()
