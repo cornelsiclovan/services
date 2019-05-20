@@ -76,14 +76,14 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank(groups={"post", "put"})
-     * @Groups({"get", "put", "post", "get-comment-with-author"})
+     * @Groups({"get", "put", "post", "get-comment-with-author", "get-client-sub-service-with-author"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      * @Assert\NotBlank(groups={"post", "put"})
-     * @Groups({"get", "post", "put", "get-comment-with-author"})
+     * @Groups({"get", "post", "put", "get-comment-with-author", "get-client-sub-service-with-author"})
      */
     private $firstName;
 

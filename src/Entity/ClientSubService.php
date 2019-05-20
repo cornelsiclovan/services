@@ -69,16 +69,21 @@ use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
  *     itemOperations={
  *          "get"={
  *                  "normalization_context"={
- *                  "groups"={"get-client-sub-service-with-author"}
- *              }
+ *                      "groups"={"get-client-sub-service-with-author"}
+ *                  }
  *          },
  *          "put"={
- *              "access_control"="is_granted('edit_for_clien', object) and object.getUser() == user",
+ *              "access_control"="is_granted('edit_for_client', object) and object.getUser() == user",
  *              "access_control_message"="You do not have permissions for this resource, or you are trying to insert wrong values"
  *          }
  *     },
  *     collectionOperations={
- *          "get"={"access_control"="is_granted('ROLE_SERVICE_PROVIDER')"},
+ *          "get"={
+ *              "get"={"access_control"="is_granted('ROLE_SERVICE_PROVIDER')"},
+ *              "normalization_context"={
+ *                  "groups"={"get-client-sub-service-with-author"}
+ *              }
+ *          },
  *          "post"={
  *              "access_control"="is_granted('create_for_client', object)",
  *              "access_control_message"="You do not have permissions for this resource, or you are trying to insert wrong values"
