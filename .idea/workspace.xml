@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bb16825b-60ed-4863-9343-62181a683f8d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/ClientSubService.php" afterPath="$PROJECT_DIR$/src/Entity/ClientSubService.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,7 +20,7 @@
         <entry file="file://$PROJECT_DIR$/src/Entity/ClientSubService.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="527">
-              <caret line="81" column="70" lean-forward="true" selection-start-line="81" selection-start-column="17" selection-end-line="81" selection-end-column="70" />
+              <caret line="81" column="70" lean-forward="false" selection-start-line="81" selection-start-column="70" selection-end-line="81" selection-end-column="70" />
               <folding>
                 <element signature="e#30#72#0#PHP" expanded="true" />
               </folding>
@@ -298,12 +297,12 @@
       <workItem from="1558440294980" duration="3875000" />
       <workItem from="1558529124714" duration="611000" />
       <workItem from="1558601038715" duration="3165000" />
-      <workItem from="1559041781081" duration="571000" />
+      <workItem from="1559041781081" duration="713000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="333197000" />
+    <option name="totallyTimeSpent" value="333339000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="2450" y="0" width="1367" height="1036" extended-state="0" />
@@ -692,7 +691,7 @@
     <entry file="file://$PROJECT_DIR$/src/Entity/ClientSubService.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
-          <caret line="81" column="70" lean-forward="true" selection-start-line="81" selection-start-column="17" selection-end-line="81" selection-end-column="70" />
+          <caret line="81" column="70" lean-forward="false" selection-start-line="81" selection-start-column="70" selection-end-line="81" selection-end-column="70" />
           <folding>
             <element signature="e#30#72#0#PHP" expanded="true" />
           </folding>
