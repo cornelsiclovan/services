@@ -79,7 +79,7 @@ use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
  *     },
  *     collectionOperations={
  *          "get"={
- *              "get"={"access_control"="is_granted('ROLE_SERVICE_PROVIDER')"},
+ *              "access_control"="is_granted('ROLE_SERVICE_PROVIDER'),
  *              "normalization_context"={
  *                  "groups"={"get-client-sub-service-with-author"}
  *              }
