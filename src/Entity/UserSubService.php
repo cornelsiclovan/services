@@ -54,7 +54,6 @@ class UserSubService implements AuthoredEntityInterface
     private $user;
 
 
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Service", inversedBy="userSubServices")
      * @Assert\NotBlank()
