@@ -105,28 +105,28 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"post"})
      * @Groups({"get", "post", "put"})
      */
     private $telephone;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"post"})
      * @Groups({"get", "post", "put"})
      */
     private $country;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"post"})
      * @Groups({"get", "post", "put"})
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"post"})
      * @Groups({"get", "post", "put"})
      */
     private $street;
@@ -233,13 +233,14 @@ class User implements UserInterface
      *     message="Please select one of the two options(client or service provider)"
      * )
      * @Groups({"get", "put", "post"})
-     * @Assert\NotNull()
+     * @Assert\NotNull(groups={"post"})
      */
     private $isServiceProvider;
 
     /**
      * @ORM\Column(type="boolean")
      * @Groups({"get", "put", "post"})
+     * @Assert\NotNull(groups={"post"})
      */
     private $isClient;
 
@@ -495,6 +496,17 @@ class User implements UserInterface
 
     public function setRoles($roles): self
     {
+        $this->setIsServiceProvider(false);
+        $this->setIsClient(false);
+
+        foreach($roles as $role){
+            if($role === 'ROLE_CLIENT'){
+                $this->setIsClient(true);
+            }else if($role === 'ROLE_SERVICE_PROVIDER'){
+                $this->setIsServiceProvider(true);
+            }
+        }
+
         $this->roles = $roles;
 
         return $this;
