@@ -496,17 +496,6 @@ class User implements UserInterface
 
     public function setRoles($roles): self
     {
-        $this->setIsServiceProvider(false);
-        $this->setIsClient(false);
-
-        foreach($roles as $role){
-            if($role === 'ROLE_CLIENT'){
-                $this->setIsClient(true);
-            }else if($role === 'ROLE_SERVICE_PROVIDER'){
-                $this->setIsServiceProvider(true);
-            }
-        }
-
         $this->roles = $roles;
 
         return $this;
