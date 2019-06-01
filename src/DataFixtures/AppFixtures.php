@@ -381,6 +381,7 @@ class AppFixtures extends Fixture
         $clientSubService->setCountry($user->getCountry());
         $clientSubService->setService($service);
         $clientSubService->setPublished($this->faker->dateTime);
+        $clientSubService->setDescription($this->faker->text);
 
         /** @var SubService $subService */
         $subService = $this->getReference("outlets");
@@ -410,6 +411,7 @@ class AppFixtures extends Fixture
         $clientSubService->setCountry($user->getCountry());
         $clientSubService->setService($service);
         $clientSubService->setPublished($this->faker->dateTime);
+        $clientSubService->setDescription($this->faker->text);
 
         /** @var SubService $subService */
         $subService = $this->getReference("wash_floors");
@@ -440,6 +442,7 @@ class AppFixtures extends Fixture
         $clientSubService->setCountry($user->getCountry());
         $clientSubService->setService($service);
         $clientSubService->setPublished($this->faker->dateTime);
+        $clientSubService->setDescription($this->faker->text);
 
         /** @var SubService $subService */
         $subService = $this->getReference("wash_floors");
