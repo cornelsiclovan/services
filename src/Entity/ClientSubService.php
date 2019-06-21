@@ -158,10 +158,16 @@ class ClientSubService implements AuthoredEntityInterface, PublishedDateEntityIn
      */
     private $description;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ServiceOffer", mappedBy="clientSubService")
+     */
+    private $serviceOffers;
+
     public function __construct()
     {
         $this->subServices = new ArrayCollection();
         $this->commments = new ArrayCollection();
+        $this->serviceOffers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -304,6 +310,13 @@ class ClientSubService implements AuthoredEntityInterface, PublishedDateEntityIn
         $this->description = $description;
     }
 
+    /**
+     * @return Collection
+     */
+    public function getServiceOffers(): Collection
+    {
+        return $this->serviceOffers;
+    }
 
     public function __toString()
     {

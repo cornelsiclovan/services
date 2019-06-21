@@ -269,6 +269,11 @@ class User implements UserInterface
      */
     private $confirmationToken;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ServiceOffer", mappedBy="author")
+     */
+    private $serviceOffers;
+
     public function __construct()
     {
         $this->userSubServices = new ArrayCollection();
@@ -276,6 +281,7 @@ class User implements UserInterface
         $this->commments = new ArrayCollection();
         $this->enabled = false;
         $this->confirmationToken = null;
+        $this->serviceOffers = new ArrayCollection();
     }
     
 
@@ -702,5 +708,13 @@ class User implements UserInterface
     public function setImage($image)
     {
         $this->image = $image;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getServiceOffers(): Collection
+    {
+        return $this->serviceOffers;
     }
 }
