@@ -14,6 +14,8 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use App\Entity\ClientSubService;
 use App\Entity\User;
 use App\Entity\UserSubService;
+use App\Exception\ClientSubServiceNotFound;
+use function count;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use function sprintf;
@@ -28,25 +30,30 @@ final class CurrentUserExtension implements QueryCollectionExtensionInterface, Q
     private $security;
     private $entityManager;
 
+
     public function __construct(Security $security, EntityManagerInterface $entityManager)
     {
         $this->security = $security;
         $this->entityManager = $entityManager;
     }
 
-
     public function applyToCollection(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, string $operationName = null)
     {
+
         $this->addWhere($queryBuilder, $resourceClass);
     }
 
     public function applyToItem(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, array $identifiers, string $operationName = null, array $context = [])
     {
-        $this->addWhere($queryBuilder, $resourceClass);
+
+       if(!$context['resource_class']==="App\Entity\ServiceOffer")
+         $this->addWhere($queryBuilder, $resourceClass);
+
     }
 
     private function addWhere(QueryBuilder $queryBuilder, string $resourceClass): void
     {
+
         /** @var User $user */
         $user = $this->security->getUser();
 
@@ -58,7 +65,8 @@ final class CurrentUserExtension implements QueryCollectionExtensionInterface, Q
             $ids[] = $user_service->getService()->getId();
         }
 
-        if(ClientSubService::class !==  $resourceClass || null === $user = $this->security->getUser())
+
+        if(ClientSubService::class !==  $resourceClass || null === $user = $this->security->getUser()  )
         {
             return;
         }

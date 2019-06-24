@@ -28,7 +28,6 @@ class CommentsVoter extends Voter
 
     protected function supports($attribute, $subject)
     {
-
         if(!in_array($attribute, [self::CREATE])) {
 
             return false;
@@ -50,33 +49,34 @@ class CommentsVoter extends Voter
         /** @var Commment $comment */
         $comment = $subject;
 
-        switch($attribute) {
-            case self::CREATE :
-                if($this->decisionManager->decide($token, ['ROLE_SERVICE_PROVIDER'])){
-                    /** @var UserSubService $userSubServices */
-                    $userSubServices = $user->getUserSubServices();
+            switch($attribute) {
+                case self::CREATE :
+                    if($this->decisionManager->decide($token, ['ROLE_SERVICE_PROVIDER'])){
+                        /** @var UserSubService $userSubServices */
+                        $userSubServices = $user->getUserSubServices();
 
-                    foreach ($userSubServices as $userSubService){
+                        foreach ($userSubServices as $userSubService){
 
-                        /** @var UserSubService $a */
-                        $a = $userSubService;
+                            /** @var UserSubService $a */
+                            $a = $userSubService;
 
-                        if($a->getService()->getId() === $comment->getClientSubService()->getService()->getId()) {
-                          return true;
+                            if($a->getService()->getId() === $comment->getClientSubService()->getService()->getId()) {
+                              return true;
+                            }
+
                         }
 
-                    }
-                    return false;
-                }
-                if($this->decisionManager->decide($token, ['ROLE_CLIENT'])) {
-                    if($comment->getClientSubService()->getUser() !== $user) {
                         return false;
                     }
+                    if($this->decisionManager->decide($token, ['ROLE_CLIENT'])) {
+                        if($comment->getClientSubService()->getUser() !== $user) {
+                            return false;
+                        }
 
-                    return true;
-                }
-                break;
-        }
+                        return true;
+                    }
+                    break;
+            }
 
 
         return false;
