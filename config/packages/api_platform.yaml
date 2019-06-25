@@ -16,4 +16,4 @@ api_platform:
     exception_to_status:
         App\Exception\EmptyBodyException: 400
         App\Exception\InvalidConfirmationTokenException: 404
-        App\Exception\ClientSubServiceNotFoundException: 404
+        App\Exception\ClientSubServiceNotFoundException: 403

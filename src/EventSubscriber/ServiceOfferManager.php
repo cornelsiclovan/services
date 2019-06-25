@@ -11,15 +11,23 @@ use ApiPlatform\Core\EventListener\EventPriorities;
 use App\Entity\ClientSubService;
 use App\Entity\ServiceOffer;
 use App\Entity\User;
-use App\Exception\ClientSubServiceNotFound;
 use App\Exception\ClientSubServiceNotFoundException;
 use function in_array;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class ServiceOfferManager implements EventSubscriberInterface
 {
+
+    /** @var  TokenStorageInterface */
+    private $tokenStorage;
+
+    public function __construct(TokenStorageInterface $tokenStorage)
+    {
+        $this->tokenStorage = $tokenStorage;
+    }
 
     public static function getSubscribedEvents(): array
     {
@@ -34,12 +42,16 @@ class ServiceOfferManager implements EventSubscriberInterface
         /** @var ServiceOffer $serviceOffer */
         $serviceOffer = $event->getControllerResult();
 
+
         if(!$serviceOffer instanceof ServiceOffer || $event->getRequest()->isMethodSafe(false)) {
             return;
         }
 
         /** @var User $user */
-        $user = $serviceOffer->getAuthor();
+        $user = $this->tokenStorage->getToken()->getUser();
+
+        ///** @var User $user */
+        //$user = $serviceOffer->getAuthor();
 
         $userServices = $user->getUserSubServices();
         $serviceIds = [];
@@ -54,13 +66,9 @@ class ServiceOfferManager implements EventSubscriberInterface
 
         $clientServiceId = $clientSubService->getService()->getId();
 
+
         if(!in_array($clientServiceId, $serviceIds)){
             throw new ClientSubServiceNotFoundException();
-        }
-
-
-        if(in_array($serviceOffer->getClientSubService(),[] )) {
-            throw new ClientSubServiceNotFound();
         }
     }
 }

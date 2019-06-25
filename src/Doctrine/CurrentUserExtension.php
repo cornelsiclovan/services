@@ -12,6 +12,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryCollectionExtensionInter
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use App\Entity\ClientSubService;
+use App\Entity\ServiceOffer;
 use App\Entity\User;
 use App\Entity\UserSubService;
 use App\Exception\ClientSubServiceNotFound;
@@ -39,7 +40,7 @@ final class CurrentUserExtension implements QueryCollectionExtensionInterface, Q
 
     public function applyToCollection(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, string $operationName = null)
     {
-
+        dump($resourceClass);
         $this->addWhere($queryBuilder, $resourceClass);
     }
 
@@ -61,13 +62,17 @@ final class CurrentUserExtension implements QueryCollectionExtensionInterface, Q
         $user_services = $this->entityManager->getRepository(UserSubService::class)->findBy(["user"=>$user]);
         $ids = [];
 
+
+
         foreach ($user_services as $user_service) {
             $ids[] = $user_service->getService()->getId();
         }
 
 
+
         if(ClientSubService::class !==  $resourceClass || null === $user = $this->security->getUser()  )
         {
+
             return;
         }
 
@@ -78,10 +83,12 @@ final class CurrentUserExtension implements QueryCollectionExtensionInterface, Q
             $queryBuilder->setParameter('current_user', $user);
         }
 
-        if($this->security->isGranted('ROLE_SERVICE_PROVIDER')){
-            $rootAlias = $queryBuilder->getRootAliases()[0];
-            $queryBuilder->andWhere(sprintf('%s.service in (:ids)', $rootAlias));
-            $queryBuilder->setParameter('ids', $ids);
-        }
+
+            if($this->security->isGranted('ROLE_SERVICE_PROVIDER')){
+                $rootAlias = $queryBuilder->getRootAliases()[0];
+                $queryBuilder->andWhere(sprintf('%s.service in (:ids)', $rootAlias));
+                $queryBuilder->setParameter('ids', $ids);
+            }
+
     }
 }
