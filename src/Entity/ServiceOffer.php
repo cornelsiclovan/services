@@ -6,10 +6,16 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
+ *     attributes={
+ *          "order"={"published": "DESC"},
+ *          "pagination_client_enabled"=true,
+ *          "pagination_client_items_per_page"=true
+ *     },
  *     itemOperations={
  *          "get",
  *          "put"={
@@ -22,6 +28,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  *              "access_control"="is_granted('ROLE_SERVICE_PROVIDER')"
  *          },
  *          "get"
+ *     },
+ *     subresourceOperations={
+ *          "api_client_sub_services_service_offers_get_subresource"={
+ *              "normalization_context"={
+ *                   "groups"={"get-service-offer-with-author"}
+ *              }
+ *          }
  *     }
  * )
  * @ORM\Entity(repositoryClass="App\Repository\ServiceOfferRepository")
@@ -36,35 +49,42 @@ class ServiceOffer implements PublishedDateEntityInterface, AuthoredEntityInterf
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"get-service-offer-with-author"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"get-service-offer-with-author"})
+     * @Groups({"get-service-offer-with-author"})
      */
     private $published;
 
     /**
      * @ORM\Column(type="float")
      * @Assert\NotBlank()
+     * @Groups({"get-service-offer-with-author"})
      */
     private $price;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
+     * @Groups({"get-service-offer-with-author"})
      */
     private $currency;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
+     * @Groups({"get-service-offer-with-author"})
      */
     private $timeNecessary;
 
     /**
      * @ORM\Column(type="boolean")
      * @Assert\NotNull()
+     * @Groups({"get-service-offer-with-author"})
      */
     private $accepted;
 
@@ -77,6 +97,7 @@ class ServiceOffer implements PublishedDateEntityInterface, AuthoredEntityInterf
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="serviceOffers")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"get-service-offer-with-author"})
      */
     private $author;
 

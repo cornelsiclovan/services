@@ -160,6 +160,7 @@ class ClientSubService implements AuthoredEntityInterface, PublishedDateEntityIn
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ServiceOffer", mappedBy="clientSubService")
+     * @ApiSubresource()
      */
     private $serviceOffers;
 
