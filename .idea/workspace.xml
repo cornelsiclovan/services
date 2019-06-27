@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bb16825b-60ed-4863-9343-62181a683f8d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/ClientSubService.php" afterPath="$PROJECT_DIR$/src/Entity/ClientSubService.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/ServiceOffer.php" afterPath="$PROJECT_DIR$/src/Entity/ServiceOffer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/User.php" afterPath="$PROJECT_DIR$/src/Entity/User.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,53 +15,13 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DockManager">
-    <window id="1">
-      <content type="file-editors">
-        <state>
-          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-            <file leaf-file-name="Commment.php" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/src/Entity/Commment.php">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="309">
-                    <caret line="39" column="46" lean-forward="false" selection-start-line="39" selection-start-column="39" selection-end-line="39" selection-end-column="46" />
-                    <folding />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file leaf-file-name="ClientSubService.php" pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/src/Entity/ClientSubService.php">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="700">
-                    <caret line="107" column="7" lean-forward="false" selection-start-line="107" selection-start-column="7" selection-end-line="107" selection-end-column="54" />
-                    <folding />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="292">
-                    <caret line="78" column="100" lean-forward="false" selection-start-line="78" selection-start-column="66" selection-end-line="78" selection-end-column="100" />
-                    <folding />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="ServiceOffer.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Entity/ServiceOffer.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="421">
-              <caret line="99" column="49" lean-forward="true" selection-start-line="99" selection-start-column="49" selection-end-line="99" selection-end-column="49" />
+            <state relative-caret-position="387">
+              <caret line="29" column="14" lean-forward="false" selection-start-line="29" selection-start-column="14" selection-end-line="29" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -72,7 +30,7 @@
       <file leaf-file-name="ServiceOfferManager.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/EventSubscriber/ServiceOfferManager.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
+            <state relative-caret-position="578">
               <caret line="52" column="10" lean-forward="false" selection-start-line="52" selection-start-column="10" selection-end-line="52" selection-end-column="10" />
               <folding>
                 <element signature="e#119#170#0#PHP" expanded="true" />
@@ -105,8 +63,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>c</find>
-      <find>content</find>
       <find>token</find>
       <find>comm</find>
       <find>telepho</find>
@@ -117,7 +73,6 @@
       <find>neces</find>
       <find>$timeNecessary</find>
       <find>auth</find>
-      <find>clientSubService</find>
       <find>getUser</find>
       <find>getAuthor</find>
       <find>$resourceClass</find>
@@ -135,6 +90,9 @@
       <find>&quot;get-comment-with-author&quot;</find>
       <find>get-client-sub-service-with-author</find>
       <find>et-client-sub-service-with-author</find>
+      <find>comment</find>
+      <find>clientSubService</find>
+      <find>nulla</find>
     </findStrings>
     <replaceStrings>
       <replace>get</replace>
@@ -207,7 +165,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="490" />
     <option name="width" value="1435" />
     <option name="height" value="1040" />
@@ -228,6 +186,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -269,6 +228,12 @@
               <item name="services2" type="b2602c69:ProjectViewProjectNode" />
               <item name="services2" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Migrations" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="services2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="services2" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Serializer" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -286,13 +251,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../services_reactjs" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
     <property name="SearchEverywhereHistoryKey" value="UserAlrea&#9;FILE&#9;file://C:/Sites/services2/src/Exception/UserAlreadyHasServiceRegisteredException.php&#10;normalize&#9;null&#9;null&#10;Norma&#9;FILE&#9;file://C:/Sites/services2/vendor/symfony/serializer/Normalizer/NormalizerInterface.php&#10;Comment&#9;FILE&#9;file://C:/Sites/services2/vendor/nikic/php-parser/lib/PhpParser/Comment.php&#10;comment&#9;null&#9;null&#10;getSubresourceOpe&#9;null&#9;null&#10;subResource&#9;FILE&#9;file://C:/Sites/services2/vendor/api-platform/core/src/Operation/Factory/SubresourceOperationFactory.php&#10;ApiSubRe&#9;null&#9;null&#10;eager&#9;FILE&#9;file://C:/Sites/services2/vendor/api-platform/core/src/Bridge/Doctrine/Orm/Extension/EagerLoadingExtension.php&#10;Firewall/Ex&#9;FILE&#9;file://C:/Sites/services2/vendor/symfony/security-http/Firewall/ExceptionListener.php" />
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
@@ -385,14 +349,21 @@
       <workItem from="1561532118592" duration="1971000" />
       <workItem from="1561534544379" duration="278000" />
       <workItem from="1561543383062" duration="1478000" />
+      <workItem from="1561619964804" duration="276000" />
+      <workItem from="1561620567664" duration="118000" />
+      <workItem from="1561620987607" duration="205000" />
+      <workItem from="1561621736152" duration="594000" />
+      <workItem from="1561622884483" duration="953000" />
+      <workItem from="1561632102857" duration="798000" />
+      <workItem from="1561634542180" duration="1587000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="406395000" />
+    <option name="totallyTimeSpent" value="410926000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="490" y="0" width="1435" height="1040" extended-state="0" />
+    <frame x="490" y="0" width="1435" height="1040" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24695776" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -432,13 +403,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/config/packages/prod/doctrine.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/packages/prod/monolog.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -718,7 +682,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="482">
           <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -726,7 +689,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-167">
           <caret line="17" column="62" lean-forward="false" selection-start-line="17" selection-start-column="53" selection-end-line="17" selection-end-column="62" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -754,16 +716,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/EventSubscriber/ServiceOfferManager.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="52" column="10" lean-forward="false" selection-start-line="52" selection-start-column="10" selection-end-line="52" selection-end-column="10" />
-          <folding>
-            <element signature="e#119#170#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/PublishedDateEntityInterface.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -774,32 +726,50 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
+        <state relative-caret-position="1156">
           <caret line="78" column="100" lean-forward="false" selection-start-line="78" selection-start-column="66" selection-end-line="78" selection-end-column="100" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/ClientSubService.php">
+    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20190627073721.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="700">
-          <caret line="107" column="7" lean-forward="false" selection-start-line="107" selection-start-column="7" selection-end-line="107" selection-end-column="54" />
+        <state relative-caret-position="425">
+          <caret line="26" column="37" lean-forward="false" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Commment.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="39" column="46" lean-forward="false" selection-start-line="39" selection-start-column="39" selection-end-line="39" selection-end-column="46" />
+        <state relative-caret-position="873">
+          <caret line="83" column="23" lean-forward="false" selection-start-line="83" selection-start-column="23" selection-end-line="83" selection-end-column="23" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/ClientSubService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="873">
+          <caret line="107" column="7" lean-forward="false" selection-start-line="107" selection-start-column="7" selection-end-line="107" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EventSubscriber/ServiceOfferManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="52" column="10" lean-forward="false" selection-start-line="52" selection-start-column="10" selection-end-line="52" selection-end-column="10" />
+          <folding>
+            <element signature="e#119#170#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/ServiceOffer.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="421">
-          <caret line="99" column="49" lean-forward="true" selection-start-line="99" selection-start-column="49" selection-end-line="99" selection-end-column="49" />
+        <state relative-caret-position="387">
+          <caret line="29" column="14" lean-forward="false" selection-start-line="29" selection-start-column="14" selection-end-line="29" selection-end-column="14" />
           <folding />
         </state>
       </provider>

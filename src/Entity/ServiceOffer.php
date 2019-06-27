@@ -21,11 +21,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          "put"={
  *              "access_control"="is_granted('ROLE_SERVICE_PROVIDER' and object.getAuthor() == user)",
  *              "access_control_message"="You do not have access to this resource."
- *          },
+ *          }
  *     },
  *     collectionOperations={
  *          "post"={
- *              "access_control"="is_granted('ROLE_SERVICE_PROVIDER')"
+ *              "access_control"="is_granted('ROLE_SERVICE_PROVIDER')",
+ *              "access_control_message"="You do not have access to this resource"
  *          },
  *          "get"
  *     },
@@ -40,7 +41,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="App\Repository\ServiceOfferRepository")
  * @UniqueEntity(
  *     fields={"author", "clientSubService"},
- *     message="You allready posted one offer for this post, you can update it."
+ *     message="You allready posted one offer for this service, please review and update if necessary."
  * )
  */
 class ServiceOffer implements PublishedDateEntityInterface, AuthoredEntityInterface
@@ -61,21 +62,22 @@ class ServiceOffer implements PublishedDateEntityInterface, AuthoredEntityInterf
     private $published;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=false)
      * @Assert\NotBlank()
+     * @Assert\NotNull()
      * @Groups({"get-service-offer-with-author"})
      */
     private $price;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", nullable=false)
      * @Assert\NotBlank()
      * @Groups({"get-service-offer-with-author"})
      */
     private $currency;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="float", nullable=false)
      * @Assert\NotBlank()
      * @Groups({"get-service-offer-with-author"})
      */
@@ -91,6 +93,7 @@ class ServiceOffer implements PublishedDateEntityInterface, AuthoredEntityInterf
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\ClientSubService", inversedBy="serviceOffers")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull()
      */
     private $clientSubService;
 
@@ -100,6 +103,13 @@ class ServiceOffer implements PublishedDateEntityInterface, AuthoredEntityInterf
      * @Groups({"get-service-offer-with-author"})
      */
     private $author;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"get-service-offer-with-author"})
+     * @Assert\NotBlank()
+     */
+    private $comment;
 
     public function getId(): ?int
     {
@@ -195,5 +205,15 @@ class ServiceOffer implements PublishedDateEntityInterface, AuthoredEntityInterf
         $this->author = $author;
 
         return $this;
+    }
+
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
     }
 }
