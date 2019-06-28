@@ -4,37 +4,13 @@
     <bookmark url="file://$PROJECT_DIR$/src/Security/UserSubServiceVoter.php" line="46" mnemonic="1" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb16825b-60ed-4863-9343-62181a683f8d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/ServiceOffer.php" afterPath="$PROJECT_DIR$/src/Entity/ServiceOffer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/User.php" afterPath="$PROJECT_DIR$/src/Entity/User.php" />
-    </list>
+    <list default="true" id="bb16825b-60ed-4863-9343-62181a683f8d" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="DockManager">
-    <window id="1">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file leaf-file-name="ClientSubService.php" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/src/Entity/ClientSubService.php">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="493">
-                    <caret line="42" column="8" lean-forward="false" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
-                    <folding />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -389,12 +365,12 @@
       <workItem from="1561622884483" duration="953000" />
       <workItem from="1561632102857" duration="798000" />
       <workItem from="1561634542180" duration="4344000" />
-      <workItem from="1561725275060" duration="784000" />
+      <workItem from="1561725275060" duration="1377000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="414467000" />
+    <option name="totallyTimeSpent" value="415060000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="490" y="0" width="1435" height="1040" extended-state="0" />
