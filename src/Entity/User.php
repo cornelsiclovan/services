@@ -22,7 +22,7 @@ use App\Controller\ResetPasswordAction;
  *              "access_control"="is_granted('IS_AUTHENTICATED_FULLY')",
  *              "access_control_message"="You do not have permission for this resource",
  *              "normalization_context"={
- *                  "groups"={"get"}
+ *                  "groups"={"get", "get-author-with-service-offers"}
  *               }
  *          },
  *          "put"={
@@ -271,6 +271,7 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ServiceOffer", mappedBy="author")
+     * @Groups({"get", "get-author-with-service-offers"})
      */
     private $serviceOffers;
 
