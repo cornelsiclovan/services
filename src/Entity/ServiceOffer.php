@@ -26,7 +26,11 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *          "pagination_client_items_per_page"=true
  *     },
  *     itemOperations={
- *          "get",
+ *          "get"={
+ *              "normalization_context"={
+ *                   "groups"={"get-service-offer-with-author"}
+ *              }
+ *          },
  *          "put"={
  *              "access_control"="is_granted('ROLE_SERVICE_PROVIDER' and object.getAuthor() == user)",
  *              "access_control_message"="You do not have access to this resource."
@@ -37,7 +41,11 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *              "access_control"="is_granted('ROLE_SERVICE_PROVIDER')",
  *              "access_control_message"="You do not have access to this resource"
  *          },
- *          "get"
+ *          "get"={
+ *               "normalization_context"={
+ *                   "groups"={"get-service-offer-with-author"}
+ *              }
+ *          }
  *     },
  *     subresourceOperations={
  *          "api_client_sub_services_service_offers_get_subresource"={
@@ -65,7 +73,6 @@ class ServiceOffer implements PublishedDateEntityInterface, AuthoredEntityInterf
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"get-service-offer-with-author"})
      * @Groups({"get-service-offer-with-author"})
      */
     private $published;
@@ -103,7 +110,7 @@ class ServiceOffer implements PublishedDateEntityInterface, AuthoredEntityInterf
      * @ORM\ManyToOne(targetEntity="App\Entity\ClientSubService", inversedBy="serviceOffers")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotNull()
-     * @Groups({"get-author-with-service-offers"})
+     * @Groups({"get-service-offer-with-author"})
      */
     private $clientSubService;
 
