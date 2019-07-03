@@ -32,14 +32,20 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *              }
  *          },
  *          "put"={
- *              "access_control"="is_granted('ROLE_SERVICE_PROVIDER' and object.getAuthor() == user)",
- *              "access_control_message"="You do not have access to this resource."
+ *              "access_control"="is_granted('ROLE_SERVICE_PROVIDER') and object.getAuthor() == user",
+ *              "access_control_message"="You do not have access to this resource.",
+ *              "denormalization_context"={
+ *                  "groups"={"put"}
+ *              }
  *          }
  *     },
  *     collectionOperations={
  *          "post"={
  *              "access_control"="is_granted('ROLE_SERVICE_PROVIDER')",
- *              "access_control_message"="You do not have access to this resource"
+ *              "access_control_message"="You do not have access to this resource",
+ *              "normalization_context"={
+ *                  "groups"={"get-service-offer-with-author"}
+ *              }
  *          },
  *          "get"={
  *               "normalization_context"={
@@ -67,7 +73,7 @@ class ServiceOffer implements PublishedDateEntityInterface, AuthoredEntityInterf
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"get-service-offer-with-author"})
+     * @Groups({"get-service-offer-with-author", "get-author-with-service-offers"})
      */
     private $id;
 
@@ -81,21 +87,21 @@ class ServiceOffer implements PublishedDateEntityInterface, AuthoredEntityInterf
      * @ORM\Column(type="float", nullable=false)
      * @Assert\NotBlank()
      * @Assert\NotNull()
-     * @Groups({"get-service-offer-with-author"})
+     * @Groups({"get-service-offer-with-author", "put"})
      */
     private $price;
 
     /**
      * @ORM\Column(type="string", nullable=false)
      * @Assert\NotBlank()
-     * @Groups({"get-service-offer-with-author"})
+     * @Groups({"get-service-offer-with-author", "put"})
      */
     private $currency;
 
     /**
      * @ORM\Column(type="float", nullable=false)
      * @Assert\NotBlank()
-     * @Groups({"get-service-offer-with-author"})
+     * @Groups({"get-service-offer-with-author", "put"})
      */
     private $timeNecessary;
 
@@ -110,7 +116,7 @@ class ServiceOffer implements PublishedDateEntityInterface, AuthoredEntityInterf
      * @ORM\ManyToOne(targetEntity="App\Entity\ClientSubService", inversedBy="serviceOffers")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotNull()
-     * @Groups({"get-service-offer-with-author"})
+     * @Groups({"get-service-offer-with-author", "get-author-with-service-offers"})
      */
     private $clientSubService;
 
@@ -125,6 +131,7 @@ class ServiceOffer implements PublishedDateEntityInterface, AuthoredEntityInterf
      * @ORM\Column(type="string", length=255)
      * @Groups({"get-service-offer-with-author"})
      * @Assert\NotBlank()
+     * @Groups({"put"})
      */
     private $comment;
 
