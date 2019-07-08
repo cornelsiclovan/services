@@ -30,6 +30,7 @@ class SubService
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"get-client-sub-service-with-author"})
      */
     private $id;
 
