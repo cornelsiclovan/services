@@ -161,8 +161,23 @@ class ClientSubService implements AuthoredEntityInterface, PublishedDateEntityIn
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ServiceOffer", mappedBy="clientSubService")
      * @ApiSubresource()
+     * @Groups({"get-client-sub-service-with-author"})
      */
     private $serviceOffers;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"get-client-sub-service-with-author"})
+     */
+    private $status;
+
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\ServiceOffer")
+     * @ORM\JoinColumn(name="accepted_offer_id", referencedColumnName="id", nullable=true)
+     * @Groups({"post"})
+     */
+    private $acceptedOffer;
 
     public function __construct()
     {
@@ -317,6 +332,26 @@ class ClientSubService implements AuthoredEntityInterface, PublishedDateEntityIn
     public function getServiceOffers(): Collection
     {
         return $this->serviceOffers;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    public function getAcceptedOffer()
+    {
+        return $this->acceptedOffer;
+    }
+
+    public function setAcceptedOffer($acceptedOffer)
+    {
+        $this->acceptedOffer = $acceptedOffer;
     }
 
     public function __toString()

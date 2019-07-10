@@ -62,13 +62,9 @@ final class CurrentUserExtension implements QueryCollectionExtensionInterface, Q
         $user_services = $this->entityManager->getRepository(UserSubService::class)->findBy(["user"=>$user]);
         $ids = [];
 
-
-
         foreach ($user_services as $user_service) {
             $ids[] = $user_service->getService()->getId();
         }
-
-
 
         if(ClientSubService::class !==  $resourceClass || null === $user = $this->security->getUser()  )
         {
@@ -84,11 +80,11 @@ final class CurrentUserExtension implements QueryCollectionExtensionInterface, Q
         }
 
 
-            if($this->security->isGranted('ROLE_SERVICE_PROVIDER')){
-                $rootAlias = $queryBuilder->getRootAliases()[0];
-                $queryBuilder->andWhere(sprintf('%s.service in (:ids)', $rootAlias));
-                $queryBuilder->setParameter('ids', $ids);
-            }
+        if($this->security->isGranted('ROLE_SERVICE_PROVIDER')){
+            $rootAlias = $queryBuilder->getRootAliases()[0];
+            $queryBuilder->andWhere(sprintf('%s.service in (:ids)', $rootAlias));
+            $queryBuilder->setParameter('ids', $ids);
+        }
 
     }
 }

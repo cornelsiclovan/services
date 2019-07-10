@@ -108,7 +108,7 @@ class ServiceOffer implements PublishedDateEntityInterface, AuthoredEntityInterf
     /**
      * @ORM\Column(type="boolean")
      * @Assert\NotNull()
-     * @Groups({"get-service-offer-with-author"})
+     * @Groups({"get-service-offer-with-author", "get-client-sub-service-with-author"})
      */
     private $accepted;
 
