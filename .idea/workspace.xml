@@ -4,10 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/Security/UserSubServiceVoter.php" line="46" mnemonic="1" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb16825b-60ed-4863-9343-62181a683f8d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/ClientSubService.php" afterPath="$PROJECT_DIR$/src/Entity/ClientSubService.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/ServiceOffer.php" afterPath="$PROJECT_DIR$/src/Entity/ServiceOffer.php" />
-    </list>
+    <list default="true" id="bb16825b-60ed-4863-9343-62181a683f8d" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
