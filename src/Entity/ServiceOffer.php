@@ -73,7 +73,7 @@ class ServiceOffer implements PublishedDateEntityInterface, AuthoredEntityInterf
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"get-service-offer-with-author", "get-author-with-service-offers"})
+     * @Groups({"get-service-offer-with-author", "get-author-with-service-offers", "get-client-sub-service-with-author"})
      */
     private $id;
 

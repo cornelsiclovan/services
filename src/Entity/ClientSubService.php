@@ -175,7 +175,7 @@ class ClientSubService implements AuthoredEntityInterface, PublishedDateEntityIn
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\ServiceOffer")
      * @ORM\JoinColumn(name="accepted_offer_id", referencedColumnName="id", nullable=true)
-     * @Groups({"post"})
+     * @Groups({"post", "get-client-sub-service-with-author"})
      */
     private $acceptedOffer;
 
