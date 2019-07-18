@@ -89,7 +89,7 @@ use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
  *          }
  *     },
  *     denormalizationContext={
- *          "groups"={"post"}
+ *          "groups"={"post", "put"}
  *     }
  * )
  */
@@ -179,6 +179,19 @@ class ClientSubService implements AuthoredEntityInterface, PublishedDateEntityIn
      */
     private $acceptedOffer;
 
+    /**
+     * @ORM\Column(type="float")
+     * @Groups({"put", "get-client-sub-service-with-author"})
+     */
+    private $rating;
+
+    /**
+     * @ORM\Column(type="text", length=5000)
+     * @Groups({"put", "get-client-sub-service-with-author"})
+     */
+    private $ratingComment;
+
+
     public function __construct()
     {
         $this->subServices = new ArrayCollection();
@@ -214,6 +227,7 @@ class ClientSubService implements AuthoredEntityInterface, PublishedDateEntityIn
 
         return $this;
     }
+
 
     /**
      * @return Collection|SubService[]
@@ -352,6 +366,26 @@ class ClientSubService implements AuthoredEntityInterface, PublishedDateEntityIn
     public function setAcceptedOffer($acceptedOffer)
     {
         $this->acceptedOffer = $acceptedOffer;
+    }
+
+    public function getRating()
+    {
+        return $this->rating;
+    }
+
+    public function setRating($rating)
+    {
+        $this->rating = $rating;
+    }
+
+    public function getRatingComment()
+    {
+        return $this->ratingComment;
+    }
+
+    public function setRatingComment($ratingComment)
+    {
+        $this->ratingComment = $ratingComment;
     }
 
     public function __toString()

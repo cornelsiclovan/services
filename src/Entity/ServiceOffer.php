@@ -135,6 +135,7 @@ class ServiceOffer implements PublishedDateEntityInterface, AuthoredEntityInterf
      */
     private $comment;
 
+
     public function getId(): ?int
     {
         return $this->id;
