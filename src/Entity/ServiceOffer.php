@@ -101,6 +101,7 @@ class ServiceOffer implements PublishedDateEntityInterface, AuthoredEntityInterf
     /**
      * @ORM\Column(type="float", nullable=false)
      * @Assert\NotBlank()
+     * @Assert\NotNull()
      * @Groups({"get-service-offer-with-author", "put"})
      */
     private $timeNecessary;
