@@ -14,6 +14,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use function var_dump;
 
 class EmptyBodySubscriber implements EventSubscriberInterface
 {
@@ -26,14 +27,18 @@ class EmptyBodySubscriber implements EventSubscriberInterface
 
     public function handleEmptyBody(GetResponseEvent $event)
     {
+
         $method = $event->getRequest()->getMethod();
-        if(!in_array($method, [Request::METHOD_POST, Request::METHOD_PUT])){
+        if(!in_array($method, [Request::METHOD_POST, Request::METHOD_PUT])) {
             return;
         }
 
-        $data = $event->getRequest()->get('data');
 
-        if(null === $data) {
+
+        $data = $event->getRequest()->get('data');
+        $file = $event->getRequest()->files->get('file');
+
+        if(null === $data && null === $file) {
             throw new EmptyBodyException();
         }
     }
