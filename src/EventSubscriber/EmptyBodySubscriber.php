@@ -33,8 +33,6 @@ class EmptyBodySubscriber implements EventSubscriberInterface
             return;
         }
 
-
-
         $data = $event->getRequest()->get('data');
         $file = $event->getRequest()->files->get('file');
 

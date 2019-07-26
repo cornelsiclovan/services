@@ -26,6 +26,12 @@ use App\Controller\UploadImageAction;
  *              "controller"=UploadImageAction::class,
  *              "defaults"={"_api_receive"=false}
  *          }
+ *     },
+ *     itemOperations={
+ *          "get",
+ *          "delete"={
+ *              "access_control"="is_granted('IS_AUTHENTICATED_FULLY')"
+ *          }
  *     }
  * )
  */
@@ -35,6 +41,7 @@ class Image
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"get"})
      */
     private $id;
 
@@ -49,6 +56,13 @@ class Image
      * @Groups({"get"})
      */
     private $url;
+
+
+    /**
+     * @ORM\Column(type="text", length=1000, nullable=true)
+     * @Groups({"get"})
+     */
+    private $preview;
 
     public function getId()
     {
@@ -73,5 +87,15 @@ class Image
     public function setUrl($url)
     {
         $this->url = $url;
+    }
+
+    public function getPreview()
+    {
+        return $this->preview;
+    }
+
+    public function setPreview($preview)
+    {
+        $this->preview = $preview;
     }
 }

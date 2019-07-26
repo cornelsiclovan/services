@@ -47,6 +47,8 @@ class UploadImageAction
         $form = $this->formFactory->create(ImageType::class, $image);
         $form->handleRequest($request);
 
+
+
         if($form->isSubmitted() && $form->isValid()) {
             // Persist the new image entity
             $this->entityManager->persist($image);

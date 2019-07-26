@@ -99,7 +99,7 @@ class ClientSubService implements AuthoredEntityInterface, PublishedDateEntityIn
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"get-client-sub-service-with-author"})
+     * @Groups({"get-client-sub-service-with-author", "get-author-with-service-offers"})
      */
     private $id;
 
@@ -181,13 +181,15 @@ class ClientSubService implements AuthoredEntityInterface, PublishedDateEntityIn
 
     /**
      * @ORM\Column(type="float")
-     * @Groups({"put", "get-client-sub-service-with-author"})
+     * @Groups({"put", "get-client-sub-service-with-author", "get-author-with-service-offers"})
+     * @Assert\NotNull()
      */
     private $rating;
 
     /**
      * @ORM\Column(type="text", length=5000)
      * @Groups({"put", "get-client-sub-service-with-author"})
+     * @Assert\NotNull()
      */
     private $ratingComment;
 

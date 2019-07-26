@@ -284,8 +284,6 @@ class User implements UserInterface
         $this->confirmationToken = null;
         $this->serviceOffers = new ArrayCollection();
     }
-    
-
 
 
     public function getId(): ?int
