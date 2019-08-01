@@ -13,6 +13,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DefaultController extends AbstractController
 {
+
+
     /**
      * @Route("/confirm-user/{token}", name="default_confirm_token")
      */

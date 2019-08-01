@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -13,9 +14,18 @@ use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Controller\ResetPasswordAction;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ApiFilter(
+ *     SearchFilter::class,
+ *     properties={
+ *          "isClient": "exact",
+ *          "city": "exact",
+ *          "country": "exact"
+ *     }
+ * )
  * @ApiResource(
  *     itemOperations={
  *          "get"={
@@ -48,6 +58,13 @@ use App\Controller\ResetPasswordAction;
  *          }
  *      },
  *     collectionOperations={
+ *          "get" = {
+ *              "access_control"="is_granted('IS_AUTHENTICATED_FULLY')",
+ *              "access_control_message"="You do not have permission for this resource",
+ *              "normalization_context"={
+ *                   "groups"={"get-collection"}
+ *               }
+ *          },
  *          "post"={
  *             "denormalization_context"={
  *                  "groups"={"post"}
@@ -69,13 +86,13 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"get"})
+     * @Groups({"get", "get-collection"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank(groups={"post", "put"})
+     * @Assert\NotBlank(groups={"post", "put", "get-collection"})
      * @Groups({"get", "put", "post", "get-comment-with-author", "get-client-sub-service-with-author", "get-service-offer-with-author"})
      */
     private $name;
@@ -83,7 +100,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      * @Assert\NotBlank(groups={"post", "put"})
-     * @Groups({"get", "post", "put", "get-comment-with-author", "get-client-sub-service-with-author", "get-service-offer-with-author"})
+     * @Groups({"get", "post", "put", "get-comment-with-author", "get-client-sub-service-with-author", "get-service-offer-with-author", "get-collection"})
      */
     private $firstName;
 
@@ -91,14 +108,14 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank(groups={"post"})
      * @Assert\Email(groups={"post"})
-     * @Groups({"post", "get-admin", "get-owner"})
+     * @Groups({"post", "get-admin", "get-owner", "get-collection"})
      * @Assert\Length(min=6, max=255)
      */
     private $email;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Image")
-     * @Groups({"get", "post", "put"})
+     * @Groups({"get", "post", "put", "get-collection"})
      * @ApiSubresource()
      */
     private $image;
@@ -106,52 +123,52 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank(groups={"post"})
-     * @Groups({"get", "post", "put"})
+     * @Groups({"get", "post", "put", "get-collection"})
      */
     private $telephone;
 
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank(groups={"post"})
-     * @Groups({"get", "post", "put"})
+     * @Groups({"get", "post", "put", "get-collection"})
      */
     private $country;
 
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank(groups={"post"})
-     * @Groups({"get", "post", "put"})
+     * @Groups({"get", "post", "put", "get-collection"})
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank(groups={"post"})
-     * @Groups({"get", "post", "put"})
+     * @Groups({"get", "post", "put", "get-collection"})
      */
     private $street;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
-     * @Groups({"get", "post", "put"})
+     * @Groups({"get", "post", "put", "get-collection"})
      */
     private $number;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
-     * @Groups({"get", "post", "put"})
+     * @Groups({"get", "post", "put", "get-collection"})
      */
     private $building;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
-     * @Groups({"get", "post", "put"})
+     * @Groups({"get", "post", "put", "get-collection"})
      */
     private $staircase;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
-     * @Groups({"get", "post", "put"})
+     * @Groups({"get", "post", "put", "get-collection"})
      */
     private $apartment;
 
@@ -209,7 +226,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="json_array")
-     * @Groups({"get-admin", "get-owner", "put", "post"})
+     * @Groups({"get-admin", "get-owner", "put", "post", "get-collection"})
      * @Assert\NotNull(groups={"post"})
      */
     private $roles;
@@ -221,7 +238,7 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\UserSubService", mappedBy="user")
-     * @Groups({"get"})
+     * @Groups({"get", "get-collection"})
      * @ApiSubresource()
      */
     private $userSubServices;
@@ -232,21 +249,21 @@ class User implements UserInterface
      *     "!this.getIsServiceProvider()==false || !this.getIsClient()==false",
      *     message="Please select one of the two options(client or service provider)"
      * )
-     * @Groups({"get", "put", "post"})
+     * @Groups({"get", "put", "post", "get-collection"})
      * @Assert\NotNull(groups={"post"})
      */
     private $isServiceProvider;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups({"get", "put", "post"})
+     * @Groups({"get", "put", "post", "get-collection"})
      * @Assert\NotNull(groups={"post"})
      */
     private $isClient;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ClientSubService", mappedBy="user")
-     * @Groups({"get"})
+     * @Groups({"get", "get-collection"})
      * @ApiSubresource()
      */
     private $clientSubServices;
