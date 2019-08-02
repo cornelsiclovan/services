@@ -50,7 +50,7 @@ class UserSubServiceToServiceTransformer implements DataTransformerInterface
 
         if(!$userSubService){
             throw new TransformationFailedException(sprintf(
-                'Nu userSubService found with service "%s"',
+                'No userSubService found with service "%s"',
                 $value
             ));
         }

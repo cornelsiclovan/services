@@ -13,8 +13,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Controller\ResetPasswordAction;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use App\Controller\ResetPasswordAction;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")

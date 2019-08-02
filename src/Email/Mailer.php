@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Email;
+use App\Entity\PasswordResetTokenEntity;
 use App\Entity\User;
 use Swift_Mailer;
 use Swift_Message;
@@ -47,5 +48,22 @@ class Mailer
 
         $this->mailer->send($message);
 
+    }
+
+    public function sendForgotPasswordEmail(PasswordResetTokenEntity $passwordResetToken, User $user)
+    {
+        $body = $this->twig->render(
+            'email/forgot_password.twig',
+            [
+                'passwordResetTokenEntity' => $passwordResetToken
+            ]
+        );
+
+        $message = (new Swift_Message('Please reset the password for your account!'))
+            ->setFrom('api-platform@gmail.com')
+            ->setTo($user->getEmail())
+            ->setBody($body, 'text/html');
+
+        $this->mailer->send($message);
     }
 }
