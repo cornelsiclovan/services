@@ -10,6 +10,7 @@ namespace App\EventSubscriber;
 use ApiPlatform\Core\EventListener\EventPriorities;
 use App\Email\Mailer;
 use App\Entity\PasswordResetTokenEntity;
+use App\Repository\PasswordResetTokenEntityRepository;
 use App\Repository\UserRepository;
 use App\Security\TokenGenerator;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -20,21 +21,23 @@ use Symfony\Component\HttpKernel\KernelEvents;
 class PasswordResetTokenEntitySubscriber implements EventSubscriberInterface
 {
     private $userRepository;
+    private $passwordResetTokenRepository;
     private $tokenGenerator;
     /** @var  Mailer */
     private $mailer;
 
-    public function __construct(UserRepository $userRepository, TokenGenerator $tokenGenerator, Mailer $mailer)
+    public function __construct(UserRepository $userRepository, TokenGenerator $tokenGenerator, Mailer $mailer, PasswordResetTokenEntityRepository $passwordResetTokenRepository )
     {
         $this->userRepository = $userRepository;
         $this->tokenGenerator = $tokenGenerator;
         $this->mailer = $mailer;
+        $this->passwordResetTokenRepository = $passwordResetTokenRepository;
     }
 
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::VIEW => ["addTokenAndUserToEntity", EventPriorities::PRE_VALIDATE]
+            KernelEvents::VIEW => ["addTokenAndUserToEntity", EventPriorities::PRE_VALIDATE],
         ];
     }
 
@@ -48,6 +51,7 @@ class PasswordResetTokenEntitySubscriber implements EventSubscriberInterface
         }
 
         $user = $this->userRepository->findOneBy(['email' => $passwordResetToken->getEmail()]);
+        $entryExists = $this->passwordResetTokenRepository->findOneBy(['user' => $user]);
 
         $passwordResetToken->setToken(
             $this->tokenGenerator->getRandomSecureToken()
@@ -55,6 +59,8 @@ class PasswordResetTokenEntitySubscriber implements EventSubscriberInterface
 
         $passwordResetToken->setUser($user);
 
-        $this->mailer->sendForgotPasswordEmail($passwordResetToken, $user);
+        if(!$entryExists)
+          $this->mailer->sendForgotPasswordEmail($passwordResetToken, $user);
     }
+
 }
