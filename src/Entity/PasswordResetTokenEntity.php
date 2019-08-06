@@ -8,7 +8,22 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     itemOperations={
+ *          "get"={
+ *                  "normalization_context"={
+ *                      "groups"={"get"}
+ *                  }
+ *              }
+ *     },
+ *     collectionOperations={
+ *          "post"={
+ *                  "normalization_context"={
+ *                       "groups"={"post"}
+ *                  }
+ *              }
+ *     }
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\PasswordResetTokenEntityRepository")
  * @UniqueEntity("user")
  */

@@ -51,6 +51,10 @@ class PasswordResetTokenEntitySubscriber implements EventSubscriberInterface
         }
 
         $user = $this->userRepository->findOneBy(['email' => $passwordResetToken->getEmail()]);
+
+        if($user === null){
+            return;
+        }
         $entryExists = $this->passwordResetTokenRepository->findOneBy(['user' => $user]);
 
         $passwordResetToken->setToken(

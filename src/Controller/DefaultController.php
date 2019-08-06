@@ -10,6 +10,8 @@ namespace App\Controller;
 use App\Security\UserConfirmationService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class DefaultController extends AbstractController
 {
@@ -22,6 +24,19 @@ class DefaultController extends AbstractController
     {
         $userConfirmationService->confirmUser($token);
 
-        return $this->redirectToRoute('app_homepage');
+        //return $this->redirectToRoute('app_homepage');
+        return new RedirectResponse("http://localhost:4100/login");
+    }
+
+    /**
+     * @Route("/recover-account/{token}", name="account_recovery")
+     */
+    public function recoverAccount(string $token)
+    {
+        $response = new RedirectResponse("http://localhost:4100/account-recovery");
+        $cookie = new Cookie('recoverAccountToken', $token);
+        $response->headers->setCookie($cookie);
+
+        return $response;
     }
 }
