@@ -57,7 +57,7 @@ class UserSubService implements AuthoredEntityInterface
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Service", inversedBy="userSubServices")
      * @Assert\NotBlank()
-     * @Groups({"put"})
+     * @Groups({"put", "get-author-with-sub-service"})
      */
     private $service;
 
