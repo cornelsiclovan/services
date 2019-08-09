@@ -15,6 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Controller\ResetPasswordAction;
+use App\Controller\ResetForgottenPasswordAction;
 
 
 /**
@@ -56,6 +57,15 @@ use App\Controller\ResetPasswordAction;
  *                  "groups"={"put-reset-password"}
  *              },
  *              "validation_groups"={"put-reset-password"}
+ *          },
+ *          "put-reset-forgotten-password"={
+ *              "method"="PUT",
+ *              "path"="/users/{id}/reset-password-forgotten",
+ *              "controller"=ResetForgottenPasswordAction::class,
+ *              "denormalization_context"={
+ *                  "groups"={"put-reset-forgotten-password"}
+ *              },
+ *              "validation_groups"={"put-reset-forgotten-password"}
  *          }
  *      },
  *     collectionOperations={

@@ -12,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use function time;
 
 class DefaultController extends AbstractController
 {
@@ -34,7 +35,7 @@ class DefaultController extends AbstractController
     public function recoverAccount(string $token)
     {
         $response = new RedirectResponse("http://localhost:4100/account-recovery");
-        $cookie = new Cookie('recoverAccountToken', $token);
+        $cookie = new Cookie('recoverAccountToken', $token, time() + 60*60, '/', 'localhost', false, false);
         $response->headers->setCookie($cookie);
 
         return $response;
