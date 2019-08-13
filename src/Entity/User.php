@@ -131,27 +131,27 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank(groups={"post"})
-     * @Groups({"get", "post", "put", "get-collection"})
+     * @Groups({"get", "post", "put", "get-collection", "get-client-sub-service-with-author"})
      */
     private $country;
 
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank(groups={"post"})
-     * @Groups({"get", "post", "put", "get-collection"})
+     * @Groups({"get", "post", "put", "get-collection", "get-client-sub-service-with-author"})
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank(groups={"post"})
-     * @Groups({"get", "post", "put", "get-collection"})
+     * @Groups({"get", "post", "put", "get-collection", "get-client-sub-service-with-author"})
      */
     private $street;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
-     * @Groups({"get", "post", "put", "get-collection"})
+     * @Groups({"get", "post", "put", "get-collection", "get-client-sub-service-with-author"})
      */
     private $number;
 

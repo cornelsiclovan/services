@@ -68,7 +68,6 @@ final class CurrentUserExtension implements QueryCollectionExtensionInterface, Q
 
         if(ClientSubService::class !==  $resourceClass || null === $user = $this->security->getUser()  )
         {
-
             return;
         }
 
