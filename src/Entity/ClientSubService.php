@@ -112,7 +112,7 @@ class ClientSubService implements AuthoredEntityInterface, PublishedDateEntityIn
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Service", inversedBy="clientSubServices")
      * @Assert\NotBlank()
-     * @Groups({"post", "get-client-sub-service-with-author"})
+     * @Groups({"post", "get-client-sub-service-with-author", "get-collection"})
      */
     private $service;
 
