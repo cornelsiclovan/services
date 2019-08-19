@@ -183,6 +183,7 @@ class ClientSubService implements AuthoredEntityInterface, PublishedDateEntityIn
      * @ORM\Column(type="float")
      * @Groups({"put", "get-client-sub-service-with-author", "get-author-with-service-offers"})
      * @Assert\NotNull()
+     * @Groups({"get-collection"})
      */
     private $rating;
 

@@ -94,7 +94,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank(groups={"post", "put", "get-collection"})
-     * @Groups({"get", "put", "post", "get-comment-with-author", "get-client-sub-service-with-author", "get-service-offer-with-author"})
+     * @Groups({"get", "put", "post", "get-comment-with-author", "get-client-sub-service-with-author", "get-service-offer-with-author", "get-collection"})
      */
     private $name;
 
@@ -289,7 +289,7 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ServiceOffer", mappedBy="author")
-     * @Groups({"get", "get-author-with-service-offers"})
+     * @Groups({"get", "get-author-with-service-offers", "get-collection"})
      */
     private $serviceOffers;
 

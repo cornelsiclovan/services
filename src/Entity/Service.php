@@ -39,7 +39,7 @@ class Service
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank()
-     * @Groups({"get-client-sub-service-with-author"})
+     * @Groups({"get-client-sub-service-with-author", "get-collection"})
      */
     private $name;
 

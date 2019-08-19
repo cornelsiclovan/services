@@ -117,7 +117,7 @@ class ServiceOffer implements PublishedDateEntityInterface, AuthoredEntityInterf
      * @ORM\ManyToOne(targetEntity="App\Entity\ClientSubService", inversedBy="serviceOffers")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotNull()
-     * @Groups({"get-service-offer-with-author", "get-author-with-service-offers"})
+     * @Groups({"get-service-offer-with-author", "get-author-with-service-offers", "get-collection"})
      */
     private $clientSubService;
 
