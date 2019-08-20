@@ -32,7 +32,7 @@ class Service
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"get-author-with-sub-service"})
+     * @Groups({"get-author-with-sub-service", "get-collection"})
      */
     private $id;
 
