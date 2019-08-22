@@ -227,7 +227,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="json_array")
-     * @Groups({"get-admin", "get-owner", "put", "post", "get-collection"})
+     * @Groups({"get-admin", "get-owner", "put", "post", "get-collection", "get"})
      * @Assert\NotNull(groups={"post"})
      */
     private $roles;

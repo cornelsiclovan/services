@@ -122,6 +122,10 @@ class ClientSubService implements AuthoredEntityInterface, PublishedDateEntityIn
      */
     private $subServices;
 
+
+    /**
+     * @Groups({"post", "get-client-sub-service-with-author"})
+     */
     private $subService;
 
     /**
