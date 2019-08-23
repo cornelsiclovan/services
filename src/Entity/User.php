@@ -28,6 +28,7 @@ use App\Controller\ResetPasswordAction;
  *     }
  * )
  * @ApiResource(
+ *     mercure=true,
  *     itemOperations={
  *          "get"={
  *              "access_control"="is_granted('IS_AUTHENTICATED_FULLY')",

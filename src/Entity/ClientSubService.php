@@ -62,6 +62,7 @@ use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
  *     }
  * )
  * @ApiResource(
+ *     mercure=true,
  *     attributes={
  *          "order"={"published": "DESC"},
  *          "pagination_client_enabled"=true
