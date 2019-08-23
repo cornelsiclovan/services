@@ -17,3 +17,4 @@ $./bin/console doctrine:migrations:migrate
 # load fixtures
 $./bin/console doctrine:fixtures:load
 
+# install mercure on the server
