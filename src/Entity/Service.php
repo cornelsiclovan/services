@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ServiceRepository")
  * @ApiResource(
+ *     mercure=true,
  *     itemOperations={
  *          "get",
  *     },

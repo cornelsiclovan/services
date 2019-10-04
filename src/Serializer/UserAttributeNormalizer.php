@@ -28,12 +28,13 @@ class UserAttributeNormalizer implements ContextAwareNormalizerInterface, Serial
 
     public function __construct(TokenStorageInterface $tokenStorage)
     {
-
         $this->tokenStorage = $tokenStorage;
     }
 
     public function supportsNormalization($data, $format = null, array $context = [])
     {
+
+
         if(isset($context[self::USER_ATTRIBUTE_NORMALIZER_ALREADY_CALLED])) {
             return false;
         }

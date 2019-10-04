@@ -36,6 +36,10 @@ class EmptyBodySubscriber implements EventSubscriberInterface
         $data = $event->getRequest()->get('data');
         $file = $event->getRequest()->files->get('file');
 
+
+
+        //The last three lines are commented for mercure testing purposes
+
         if(null === $data && null === $file) {
             throw new EmptyBodyException();
         }

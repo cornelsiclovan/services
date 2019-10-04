@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -13,13 +14,18 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommmentRepository")
  * @ApiResource(
+ *     mercure=true,
  *     attributes={
  *       "order"={"published": "DESC"},
  *       "pagination_client_enabled"=true,
  *       "pagination_client_items_per_page"=true
  *     },
  *     itemOperations={
- *       "get",
+ *       "get"={
+ *             "normalization_context"={
+ *                  "groups"={"get-comment-with-author"}
+ *           }
+ *        },
  *       "put"={
  *          "access_control"="is_granted('IS_AUTHENTICATED_FULLY') and object.getAuthor() == user"
  *       }
@@ -48,6 +54,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Commment implements AuthoredEntityInterface, PublishedDateEntityInterface
 {
+
+    public function __construct()
+    {
+        $this->owners = new ArrayCollection();
+    }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -66,7 +78,7 @@ class Commment implements AuthoredEntityInterface, PublishedDateEntityInterface
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\ClientSubService", inversedBy="commments")
      * @Assert\NotNull()
-     * @Groups({"post-comment"})
+     * @Groups({"post-comment", "get-comment-with-author"})
      */
     private $clientSubService;
 
@@ -82,6 +94,7 @@ class Commment implements AuthoredEntityInterface, PublishedDateEntityInterface
      * @Groups({"get-comment-with-author"})
      */
     private $published;
+
 
     public function getId(): ?int
     {
@@ -142,6 +155,8 @@ class Commment implements AuthoredEntityInterface, PublishedDateEntityInterface
 
         return $this;
     }
+
+
 
     public function __toString()
     {
