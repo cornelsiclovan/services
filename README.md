@@ -18,3 +18,5 @@ $./bin/console doctrine:migrations:migrate
 $./bin/console doctrine:fixtures:load
 
 # install mercure on the server
+# and run with the command below
+JWT_KEY='myJWTKey' ADDR=':3000' DEMO=1 ALLOW_ANONYMOUS=1 CORS_ALLOWED_ORIGINS=* PUBLISH_ALLOWED_ORIGINS='http://localhost:8000' ./mercure

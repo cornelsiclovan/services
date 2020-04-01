@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommmentRepository")
  * @ApiResource(
- *     mercure=true,
+ *     mercure="true",
  *     attributes={
  *       "order"={"published": "DESC"},
  *       "pagination_client_enabled"=true,
@@ -38,6 +38,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          "normalization_context"={
  *                  "groups"={"get-comment-with-author"}
  *           }
+ *
  *       },
  *     },
  *     subresourceOperations={
@@ -54,7 +55,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Commment implements AuthoredEntityInterface, PublishedDateEntityInterface
 {
-
     public function __construct()
     {
         $this->owners = new ArrayCollection();

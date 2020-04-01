@@ -20,6 +20,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *     }
  * )
  * @ApiResource(
+ *     mercure="true",
  *     attributes={
  *          "order"={"published": "DESC"},
  *          "pagination_client_enabled"=true,
@@ -36,6 +37,9 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *              "access_control_message"="You do not have access to this resource.",
  *              "denormalization_context"={
  *                  "groups"={"put"}
+ *              },
+ *              "normalization_context"={
+ *                   "groups"={"get-service-offer-with-author"}
  *              }
  *          }
  *     },
